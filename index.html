@@ -160,6 +160,172 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-营销活动-优惠券架构设计" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/16/营销活动-优惠券架构设计/">营销活动&amp;优惠券架构设计</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/16/营销活动-优惠券架构设计/" class="archive-article-date">
+  	<time datetime="2018-11-16T08:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="优惠券的生命周期和设计实现"><a href="#优惠券的生命周期和设计实现" class="headerlink" title="优惠券的生命周期和设计实现"></a>优惠券的生命周期和设计实现</h2><p>优惠券作为一种重要营销手段, 每张优惠券的生命周期以下几个链路组成</p>
+<h3 id="投放"><a href="#投放" class="headerlink" title="投放"></a>投放</h3><p>投放是指在创建优惠券之前，需要确定优惠券是投放在哪个渠道，用什么形式投放？会有怎样的成本收益，如何与其他效果差异等等？</p>
+<p>把投放放在最前面，是指我们在制券的时候已经对券要投放在哪个渠道有了认识，相当于你要做一个活动，先确定活动的框架，再搭活动中的细节，完成每个事项，然后推动活动上线，最后回收上线数据，前提是你要先确定这次活动的目标和形式。</p>
+<h4 id="1、投放渠道"><a href="#1、投放渠道" class="headerlink" title="1、投放渠道"></a>1、投放渠道</h4><p>投放渠道分端内和端外，覆盖产品的主要补贴渠道。</p>
+<p><img class="alignnone size-full wp-image-67" src="http://blog.hyfzc.cn/wp-content/uploads/2018/11/优惠券投放渠道.jpg" alt="" width="700"></p>
+        
+          <a class="article-more-a" href="/2018/11/16/营销活动-优惠券架构设计/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">业务架构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/16/营销活动-优惠券架构设计/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-延时消息设计" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/16/延时消息设计/">延时消息设计</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/16/延时消息设计/" class="archive-article-date">
+  	<time datetime="2018-11-16T08:30:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><pre><code>    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。
+笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后，
+先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的），
+并且很多都不完善,加上公司业务场景需要支持每个topic只能有一个job的限制，
+以及同一个job操作计数达到某个值后就触发转为可执行job。
+所以笔者打算依据现有的延时队列实现原理，一步一步实现一个分布式延时队列
+</code></pre><h2 id="常见的实现方案"><a href="#常见的实现方案" class="headerlink" title="常见的实现方案"></a>常见的实现方案</h2><pre><code>1. DelayQueue 
+    原理：jdk中提供的使用优先队列实现的BlockingQueue，优先队列比较的是时间，内部存储的是实现Delayed接口的对象。 
+          只有在对象过期后才能从队列中获取对象。
+    优点：效率高，任务触发时间延迟低
+    缺点： 数据是保存在内存，需要自己实现持久化；不具备分布式能力，需要自己实现高可用
+2. RabbitMq 死信队列
+    原理：RabbitMQ可以对队列和消息设置x-message-tt、expiration来控制消息的存活时间，如果超时，消息变为死信。
+          RabbitMQ可以对队列设置x-dead-letter-exchange和x-dead-letter-routing-key两个参数。
+          当消息在一个队列中变成死信后会按这两个参数路由，消息就可以重新被消费。
+    优点：
+        高效，可以利用RabbitMQ的分布式特性轻易进行横向扩展，且支持持久化
+    缺点：
+        不支持对已发送的消息进行管理
+        一个消息比在同一队列中在它之前的其他消息提前过期，提前过期的消息也不会优先进入死信队列。比如
+</code></pre>
+        
+          <a class="article-more-a" href="/2018/11/16/延时消息设计/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/16/延时消息设计/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-mywork" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -384,6 +550,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">业务架构</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
