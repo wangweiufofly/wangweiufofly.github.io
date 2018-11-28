@@ -5,14 +5,14 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="dns-prefetch" href="//blog.hyfzc.cn">
+  <link rel="dns-prefetch" href="//www.hyfzc.cn">
   <title>延时消息设计 | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="背景    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。 笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后， 先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的）， 并且很多都不完善,加上公司业务场景需要支持每个topic只能有">
 <meta name="keywords" content="服务端,java,Spring,mysql,redis,程序猿,开源,架构,用户体验">
 <meta property="og:type" content="article">
 <meta property="og:title" content="延时消息设计">
-<meta property="og:url" content="//blog.hyfzc.cn/2018/11/16/延时消息设计/index.html">
+<meta property="og:url" content="//www.hyfzc.cn/2018/11/16/延时消息设计/index.html">
 <meta property="og:site_name" content="Yeling的博客">
 <meta property="og:description" content="背景    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。 笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后， 先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的）， 并且很多都不完善,加上公司业务场景需要支持每个topic只能有">
 <meta property="og:locale" content="default">
@@ -56,7 +56,7 @@
 		  <h1 class="header-author"><a href="/">Yeling</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">胆小认生，不易相处</p>
+		<p class="header-subtitle">不穿格子衫</p>
 		
 
 		<nav class="header-menu">
@@ -116,7 +116,7 @@
 			  <h1 class="header-author js-header-author">Yeling</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>胆小认生，不易相处<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>不穿格子衫<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -347,7 +347,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.hyfzc.cn/2018/11/16/延时消息设计/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.hyfzc.cn/2018/11/16/延时消息设计/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -499,6 +499,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">业务架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
               </li>
             
             <div class="clearfix"></div>

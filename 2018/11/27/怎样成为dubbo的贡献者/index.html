@@ -6,20 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//www.hyfzc.cn">
-  <title>Hello World | Yeling的博客</title>
+  <title>怎样成为dubbo的贡献者 | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords" content="服务端,java,Spring,mysql,redis,程序猿,开源,架构,用户体验">
+  <meta name="description" content="一.关系图">
+<meta name="keywords" content="github,dubbo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="//www.hyfzc.cn/2018/11/15/hello-world/index.html">
+<meta property="og:title" content="怎样成为dubbo的贡献者">
+<meta property="og:url" content="//www.hyfzc.cn/2018/11/27/怎样成为dubbo的贡献者/index.html">
 <meta property="og:site_name" content="Yeling的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="一.关系图">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-15T15:44:26.606Z">
+<meta property="og:image" content="//www.hyfzc.cn/assets/2018/github-guanxitu.png">
+<meta property="og:image" content="//www.hyfzc.cn/assets/2018/dubbo-naotu.png">
+<meta property="og:image" content="//www.hyfzc.cn/assets/2018/dubbo-pull-request.png">
+<meta property="og:image" content="//www.hyfzc.cn/assets/2018/git-stat.png">
+<meta property="og:updated_time" content="2018-11-28T05:32:06.031Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="怎样成为dubbo的贡献者">
+<meta name="twitter:description" content="一.关系图">
+<meta name="twitter:image" content="//www.hyfzc.cn/assets/2018/github-guanxitu.png">
   
     <link rel="alternative" href="/atom.xml" title="Yeling的博客" type="application/atom+xml">
   
@@ -159,35 +164,48 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-怎样成为dubbo的贡献者" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      怎样成为dubbo的贡献者
     </h1>
   
 
         
-        <a href="/2018/11/15/hello-world/" class="archive-article-date">
-  	<time datetime="2018-11-15T15:44:26.606Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
+        <a href="/2018/11/27/怎样成为dubbo的贡献者/" class="archive-article-date">
+  	<time datetime="2018-11-27T13:11:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="一-关系图"><a href="#一-关系图" class="headerlink" title="一.关系图"></a>一.关系图</h2><p><img src="/assets/2018/github-guanxitu.png" alt="关系图"><br><a id="more"></a></p>
+<h2 id="二-操作流程"><a href="#二-操作流程" class="headerlink" title="二.操作流程"></a>二.操作流程</h2><p><img src="/assets/2018/dubbo-naotu.png" alt="步骤"></p>
+<h2 id="三-一些命令"><a href="#三-一些命令" class="headerlink" title="三.一些命令"></a>三.一些命令</h2><ul>
+<li>以dubbo为例<br>dubbo原地址：<a href="https://github.com/apache/incubator-dubbo.git" target="_blank" rel="noopener">https://github.com/apache/incubator-dubbo.git</a><br>fork后地址：<a href="https://github.com/wangweiufofly/incubator-dubbo.git" target="_blank" rel="noopener">https://github.com/wangweiufofly/incubator-dubbo.git</a></li>
+</ul>
+<h4 id="1、git-clone-fork的项目到本地"><a href="#1、git-clone-fork的项目到本地" class="headerlink" title="1、git clone fork的项目到本地"></a>1、git clone fork的项目到本地</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/wangweiufofly/incubator-dubbo.git</span><br></pre></td></tr></table></figure>
+<h4 id="2、git-remote-add-upstream增加源分支地址"><a href="#2、git-remote-add-upstream增加源分支地址" class="headerlink" title="2、git remote add upstream增加源分支地址"></a>2、git remote add upstream增加源分支地址</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cd incubator-dubbo</span><br><span class="line"></span><br><span class="line">//增加远程分支</span><br><span class="line">git remote add upstream https://github.com/apache/incubator-dubbo.git</span><br><span class="line"></span><br><span class="line">//fetch源分支的新版本到本地</span><br><span class="line">git fetch upstream</span><br><span class="line"></span><br><span class="line">//查看远程源</span><br><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h4 id="3、git-push-提交代码到github"><a href="#3、git-push-提交代码到github" class="headerlink" title="3、git push 提交代码到github"></a>3、git push 提交代码到github</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//本地创建分支并切换</span><br><span class="line">git branch mybranch</span><br><span class="line">git checkout mybranch</span><br><span class="line">git branch -a</span><br><span class="line"></span><br><span class="line">//提交</span><br><span class="line">git commit -m &quot;测试的一次提交&quot;</span><br><span class="line"></span><br><span class="line">//提交代码到github</span><br><span class="line">git push --set-upstream origin test</span><br></pre></td></tr></table></figure>
+<h4 id="4、提交给github的new-pull-request"><a href="#4、提交给github的new-pull-request" class="headerlink" title="4、提交给github的new pull request"></a>4、提交给github的new pull request</h4><p>这块是github界面操作,入下图。<br><img src="/assets/2018/dubbo-pull-request.png" width="800" div="" align="center"></p>
+<h2 id="四、科普GitHub功能按钮"><a href="#四、科普GitHub功能按钮" class="headerlink" title="四、科普GitHub功能按钮"></a>四、科普GitHub功能按钮</h2><p>github中的watch、star、fork的作用</p>
+<h4 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h4><ul>
+<li>观察，点击watch可以看到如下的列表。</li>
+</ul>
+<p>默认每一个用户都是处于Not watching的状态，当你选择Watching，表示你以后会关注这个项目的所有动态，以后只要这个项目发生变动，如被别人提交了pull request、被别人发起了issue等等情况，<br>你都会在自己的个人通知中心，收到一条通知消息，如果你设置了个人邮箱，那么你的邮箱也可能收到相应的邮件。</p>
+<h4 id="star"><a href="#star" class="headerlink" title="star"></a>star</h4><ul>
+<li>star，理解为<code>关注</code>或者<code>点赞</code>，当你点击 star,表示你喜欢这个项目或者通俗点，可以把他理解成朋友圈的点赞吧，表示对这个项目的支持。</li>
+</ul>
+<p>不过相比朋友圈的点赞，github 里面会有一个列表，专门收集了你所有 start 过的项目，点击 github 个人头像，可以看到 your star的条目，点击就可以查看你 star 过的所有项目了。如下图<br><img src="/assets/2018/git-stat.png" width="800" div="" align="center"></p>
+<h4 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h4><ul>
+<li>fork，相当于你自己有了一份原项目的拷贝，当然这个拷贝只是针对当时的项目文件，如果后续原项目文件发生改变，你必须通过其他的方式去同步。</li>
+</ul>
+<p>使用 fork 这个功能，一般不会用，除了有一些项目，可能存在 bug 或者可以继续优化的地方，你想帮助原项目作者去完善这个项目。</p>
 
       
 
@@ -217,6 +235,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -267,7 +300,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.hyfzc.cn/2018/11/15/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.hyfzc.cn/2018/11/27/怎样成为dubbo的贡献者/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -281,15 +314,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/11/16/mywork/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          mywork
-        
-      </div>
-    </a>
   
+    <a href="/2018/11/16/营销活动-优惠券架构设计/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">营销活动&amp;优惠券架构设计</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
