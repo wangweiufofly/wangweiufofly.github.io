@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//wangweiufofly.github.io">
-  <title>Yeling的博客</title>
+  <title>Dubbo源码学习-序 | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农，Java服务端菜鸟一枚。">
-<meta name="keywords" content="服务端,java,Spring,mysql,redis,程序猿,开源,架构,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yeling的博客">
-<meta property="og:url" content="//wangweiufofly.github.io/index.html">
+  <meta name="description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
+<meta name="keywords" content="Dubbo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dubbo源码学习-序">
+<meta property="og:url" content="//wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/index.html">
 <meta property="og:site_name" content="Yeling的博客">
-<meta property="og:description" content="码农，Java服务端菜鸟一枚。">
+<meta property="og:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-jiagou.png">
+<meta property="og:updated_time" content="2018-12-05T11:53:18.642Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yeling的博客">
-<meta name="twitter:description" content="码农，Java服务端菜鸟一枚。">
+<meta name="twitter:title" content="Dubbo源码学习-序">
+<meta name="twitter:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
+<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
   
     <link rel="alternative" href="/atom.xml" title="Yeling的博客" type="application/atom+xml">
   
@@ -158,92 +162,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Dubbo源码学习-2-SPI" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+            <article id="post-Dubbo源码学习-1-序" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/05/Dubbo源码学习-2-SPI/">dubbo源码学习-2-SPI</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/05/Dubbo源码学习-2-SPI/" class="archive-article-date">
-  	<time datetime="2018-12-05T06:01:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h2><p>Service Provider Interface,服务提供接口，是指的一种服务发现机制。</p>
-<h2 id="JDK-SPI-and-Dubbo-SPI"><a href="#JDK-SPI-and-Dubbo-SPI" class="headerlink" title="JDK-SPI and Dubbo-SPI"></a>JDK-SPI and Dubbo-SPI</h2><p><img src="/assets/2018/dubbo/spi.png" width="1000" div="" align="center"></p>
-        
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/05/Dubbo源码学习-2-SPI/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Dubbo源码学习-1-序" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/02/Dubbo源码学习-1-序/">Dubbo源码学习-序</a>
+    <h1 class="article-title" itemprop="name">
+      Dubbo源码学习-序
     </h1>
   
 
@@ -260,8 +186,12 @@
 <li>前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。</li>
 </ul>
 <h2 id="dubbo的架构"><a href="#dubbo的架构" class="headerlink" title="dubbo的架构"></a>dubbo的架构</h2><p><img src="/assets/2018/dubbo/dubbo-liuchengtu.png" width="1000" div="" align="center"></p>
-        
-        
+<a id="more"></a>
+<h2 id="dubbo的技术点分解"><a href="#dubbo的技术点分解" class="headerlink" title="dubbo的技术点分解"></a>dubbo的技术点分解</h2><p><img src="/assets/2018/dubbo/dubbo-jiagou.png" width="1000" div="" align="center"></p>
+<ul>
+<li>后面继续学习知识点</li>
+</ul>
+
       
 
       
@@ -283,16 +213,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/02/Dubbo源码学习-1-序/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/12/05/Dubbo源码学习-2-SPI/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          dubbo源码学习-2-SPI
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/27/怎样成为Dubbo的贡献者/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">怎样成为dubbo的贡献者</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -312,384 +310,14 @@
 
 
 
-
   
-    <article id="post-怎样成为Dubbo的贡献者" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/27/怎样成为Dubbo的贡献者/">怎样成为dubbo的贡献者</a>
-    </h1>
   
 
-        
-        <a href="/2018/11/27/怎样成为Dubbo的贡献者/" class="archive-article-date">
-  	<time datetime="2018-11-27T13:11:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-关系图"><a href="#一-关系图" class="headerlink" title="一.关系图"></a>一.关系图</h2><p><img src="/assets/2018/github-guanxitu.png" alt="关系图"><br>
-        
-        
-      
-
-      
-    </p></div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/27/怎样成为Dubbo的贡献者/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-营销活动-优惠券架构设计" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/营销活动-优惠券架构设计/">营销活动&amp;优惠券架构设计</a>
-    </h1>
   
 
-        
-        <a href="/2018/11/16/营销活动-优惠券架构设计/" class="archive-article-date">
-  	<time datetime="2018-11-16T08:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h2 id="优惠券的生命周期和设计实现"><a href="#优惠券的生命周期和设计实现" class="headerlink" title="优惠券的生命周期和设计实现"></a>优惠券的生命周期和设计实现</h2><p>优惠券作为一种重要营销手段, 每张优惠券的生命周期以下几个链路组成</p>
-<h3 id="投放"><a href="#投放" class="headerlink" title="投放"></a>投放</h3><p>投放是指在创建优惠券之前，需要确定优惠券是投放在哪个渠道，用什么形式投放？会有怎样的成本收益，如何与其他效果差异等等？</p>
-<p>把投放放在最前面，是指我们在制券的时候已经对券要投放在哪个渠道有了认识，相当于你要做一个活动，先确定活动的框架，再搭活动中的细节，完成每个事项，然后推动活动上线，最后回收上线数据，前提是你要先确定这次活动的目标和形式。</p>
-<h4 id="1、投放渠道"><a href="#1、投放渠道" class="headerlink" title="1、投放渠道"></a>1、投放渠道</h4><p>投放渠道分端内和端外，覆盖产品的主要补贴渠道。</p>
-<p><img class="alignnone size-full wp-image-67" src="http://blog.hyfzc.cn/wp-content/uploads/2018/11/优惠券投放渠道.jpg" alt="" width="700"></p>
-        
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">业务架构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/16/营销活动-优惠券架构设计/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-延时消息设计" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/延时消息设计/">延时消息设计</a>
-    </h1>
   
 
-        
-        <a href="/2018/11/16/延时消息设计/" class="archive-article-date">
-  	<time datetime="2018-11-16T08:30:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><pre><code>    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。
-笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后，
-先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的），
-并且很多都不完善,加上公司业务场景需要支持每个topic只能有一个job的限制，
-以及同一个job操作计数达到某个值后就触发转为可执行job。
-所以笔者打算依据现有的延时队列实现原理，一步一步实现一个分布式延时队列
-</code></pre><h2 id="常见的实现方案"><a href="#常见的实现方案" class="headerlink" title="常见的实现方案"></a>常见的实现方案</h2><pre><code>1. DelayQueue 
-    原理：jdk中提供的使用优先队列实现的BlockingQueue，优先队列比较的是时间，内部存储的是实现Delayed接口的对象。 
-          只有在对象过期后才能从队列中获取对象。
-    优点：效率高，任务触发时间延迟低
-    缺点： 数据是保存在内存，需要自己实现持久化；不具备分布式能力，需要自己实现高可用
-2. RabbitMq 死信队列
-    原理：RabbitMQ可以对队列和消息设置x-message-tt、expiration来控制消息的存活时间，如果超时，消息变为死信。
-          RabbitMQ可以对队列设置x-dead-letter-exchange和x-dead-letter-routing-key两个参数。
-          当消息在一个队列中变成死信后会按这两个参数路由，消息就可以重新被消费。
-    优点：
-        高效，可以利用RabbitMQ的分布式特性轻易进行横向扩展，且支持持久化
-    缺点：
-        不支持对已发送的消息进行管理
-        一个消息比在同一队列中在它之前的其他消息提前过期，提前过期的消息也不会优先进入死信队列。比如
-</code></pre>
-        
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/16/延时消息设计/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mywork" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/mywork/">mywork</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/16/mywork/" class="archive-article-date">
-  	<time datetime="2018-11-16T08:26:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/16/mywork/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/15/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/15/hello-world/" class="archive-article-date">
-  	<time datetime="2018-11-15T15:44:26.606Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/15/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -712,8 +340,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
