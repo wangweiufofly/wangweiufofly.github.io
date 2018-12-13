@@ -6,23 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//wangweiufofly.github.io">
-  <title>Dubbo源码学习-序 | Yeling的博客</title>
+  <title>Elastic-Job项目源码-架构原理探索 | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
-<meta name="keywords" content="Dubbo">
+  <meta name="description" content="在之前的文章中介绍了elatic-job的出现背景，和能解决的问题，下面我们通过源码的方式来分析一下elatic-job的架构。  1、环境准备Zookeeper使用Zookeeper为注册中心。所以需要在本地启动zookeeper，作为Dubbo的注册中心。启动Zookeeper服务：用于elastic-job的调度中心。启动zooweb:这种看zk客户端有很多，我推荐zooweb，基于淘宝的">
+<meta name="keywords" content="elastic-job">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dubbo源码学习-序">
-<meta property="og:url" content="//wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/index.html">
+<meta property="og:title" content="Elastic-Job项目源码-架构原理探索">
+<meta property="og:url" content="//wangweiufofly.github.io/2018/12/08/Elastic-Job项目源码-架构原理探索/index.html">
 <meta property="og:site_name" content="Yeling的博客">
-<meta property="og:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
+<meta property="og:description" content="在之前的文章中介绍了elatic-job的出现背景，和能解决的问题，下面我们通过源码的方式来分析一下elatic-job的架构。  1、环境准备Zookeeper使用Zookeeper为注册中心。所以需要在本地启动zookeeper，作为Dubbo的注册中心。启动Zookeeper服务：用于elastic-job的调度中心。启动zooweb:这种看zk客户端有很多，我推荐zooweb，基于淘宝的">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-jiagou.png">
-<meta property="og:updated_time" content="2018-12-05T11:53:18.642Z">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/zooweb.png">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/elastic-job-lite-jiagou.png">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/elastic-job-code.png">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/elastic-job-eg-1.png">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/elastic-job-zk.jpg">
+<meta property="og:updated_time" content="2018-12-13T12:31:51.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo源码学习-序">
-<meta name="twitter:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
-<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
+<meta name="twitter:title" content="Elastic-Job项目源码-架构原理探索">
+<meta name="twitter:description" content="在之前的文章中介绍了elatic-job的出现背景，和能解决的问题，下面我们通过源码的方式来分析一下elatic-job的架构。  1、环境准备Zookeeper使用Zookeeper为注册中心。所以需要在本地启动zookeeper，作为Dubbo的注册中心。启动Zookeeper服务：用于elastic-job的调度中心。启动zooweb:这种看zk客户端有很多，我推荐zooweb，基于淘宝的">
+<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/zooweb.png">
   
     <link rel="alternative" href="/atom.xml" title="Yeling的博客" type="application/atom+xml">
   
@@ -152,20 +155,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Dubbo源码学习-1-序" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-Elastic-Job项目源码-架构原理探索" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Dubbo源码学习-序
+      Elastic-Job项目源码-架构原理探索
     </h1>
   
 
         
-        <a href="/2018/12/02/Dubbo源码学习-1-序/" class="archive-article-date">
-  	<time datetime="2018-12-02T06:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-02</time>
+        <a href="/2018/12/08/Elastic-Job项目源码-架构原理探索/" class="archive-article-date">
+  	<time datetime="2018-12-08T12:49:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-08</time>
 </a>
         
       </header>
@@ -173,14 +176,130 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li>前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。</li>
+<li>在之前的文章中介绍了elatic-job的出现背景，和能解决的问题，下面我们通过源码的方式来分析一下elatic-job的架构。</li>
 </ul>
-<h2 id="dubbo的架构"><a href="#dubbo的架构" class="headerlink" title="dubbo的架构"></a>dubbo的架构</h2><p><img src="/assets/2018/dubbo/dubbo-liuchengtu.png" width="1000" div="" align="center"></p>
+<h1 id="1、环境准备"><a href="#1、环境准备" class="headerlink" title="1、环境准备"></a>1、环境准备</h1><h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>使用Zookeeper为注册中心。所以需要在本地启动zookeeper，作为Dubbo的注册中心。<br>启动Zookeeper服务：用于elastic-job的调度中心。<br>启动zooweb:这种看zk客户端有很多，我推荐zooweb，基于淘宝的zkWeb客户端改造成springboot的启动，很方便。<br>github:<br><a href="https://github.com/zhuhongyu345/zooweb" target="_blank" rel="noopener">https://github.com/zhuhongyu345/zooweb</a><br><img src="/assets/2018/elstic-job/zooweb.png" width="600" div="" align="center"></p>
+<h2 id="elastic-job-lite-源码"><a href="#elastic-job-lite-源码" class="headerlink" title="elastic-job-lite 源码"></a>elastic-job-lite 源码</h2><p>gitHub:<br><a href="https://github.com/elasticjob/elastic-job-lite" target="_blank" rel="noopener">https://github.com/elasticjob/elastic-job-lite</a></p>
 <a id="more"></a>
-<h2 id="dubbo的技术点分解"><a href="#dubbo的技术点分解" class="headerlink" title="dubbo的技术点分解"></a>dubbo的技术点分解</h2><p><img src="/assets/2018/dubbo/dubbo-jiagou.png" width="1000" div="" align="center"></p>
+<h1 id="2、elastic-job角色"><a href="#2、elastic-job角色" class="headerlink" title="2、elastic-job角色"></a>2、elastic-job角色</h1><p>再看一次架构：<br><img src="/assets/2018/elstic-job/elastic-job-lite-jiagou.png" width="800" div="" align="center"></p>
 <ul>
-<li>后面继续学习知识点</li>
+<li>作业job<br>Elastic-job提供三种作业类型：Simple类型作业、Dataflow类型作业、Script类型作业。</li>
+<li>注册中心<br>Elastic-Job依赖Zookeeper作为注册中心，利用zk的功能完成节点选举、分片和配置变更等相关的功能</li>
+<li>任务调度框架<br>Elastic-Job底层依赖quartz框架进行任务的调度</li>
 </ul>
+<h1 id="3、elastic-job源码大致解读"><a href="#3、elastic-job源码大致解读" class="headerlink" title="3、elastic-job源码大致解读"></a>3、elastic-job源码大致解读</h1><p><img src="/assets/2018/elstic-job/elastic-job-code.png" width="800" div="" align="center"></p>
+<h2 id="elastic-job-example"><a href="#elastic-job-example" class="headerlink" title="elastic-job-example"></a>elastic-job-example</h2><p>elastic-job源码虽说注释很少，但是测试用例，测试demo可以说覆盖率极高，点个大赞，程序猿阅读足矣。</p>
+<ul>
+<li>elastic-job-example-cloud</li>
+<li>elastic-job-example-embed-zk</li>
+<li>elastic-job-example-jobs</li>
+<li>elastic-job-example-lite-java</li>
+<li>elastic-job-example-lite-spring</li>
+<li>elastic-job-example-lite-springboot</li>
+</ul>
+<h2 id="elastic-job-lite-console"><a href="#elastic-job-lite-console" class="headerlink" title="elastic-job-lite-console"></a>elastic-job-lite-console</h2><p>elastic-job的控制台，方便查看各个任务的执行情况和手工调度，禁用等等功能。</p>
+<h2 id="elastic-job-lite-core"><a href="#elastic-job-lite-core" class="headerlink" title="elastic-job-lite-core"></a>elastic-job-lite-core</h2><p>elastic-job的核心库，负责任务创建，状态变更，选举，路由等等核心功能。</p>
+<h2 id="elastic-job-lite-lifecycle"><a href="#elastic-job-lite-lifecycle" class="headerlink" title="elastic-job-lite-lifecycle"></a>elastic-job-lite-lifecycle</h2><p>elastic-job的任务的操作封装类，和作业相关的 API 集合服务。</p>
+<h2 id="elastic-job-lite-spring"><a href="#elastic-job-lite-spring" class="headerlink" title="elastic-job-lite-spring"></a>elastic-job-lite-spring</h2><p>elastic-job的任务支持Spring容器加载。</p>
+<h1 id="4、elastic-job-例子"><a href="#4、elastic-job-例子" class="headerlink" title="4、elastic-job 例子"></a>4、elastic-job 例子</h1><h2 id="官方的例子"><a href="#官方的例子" class="headerlink" title="官方的例子"></a>官方的例子</h2><h3 id="这里简单的先使用elastic-job-example-lite-springboot的例子"><a href="#这里简单的先使用elastic-job-example-lite-springboot的例子" class="headerlink" title="这里简单的先使用elastic-job-example-lite-springboot的例子"></a>这里简单的先使用elastic-job-example-lite-springboot的例子</h3><ul>
+<li>pom.xml：依赖</li>
+</ul>
+<pre><code class="xml"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span>
+<span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span>
+<span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span>
+    ...
+    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>
+        ...
+        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.dangdang<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>elastic-job-lite-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span>
+        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.dangdang<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>elastic-job-lite-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span>
+        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
+        ...
+    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">project</span>&gt;</span>
+</code></pre>
+<ul>
+<li>application.yml:zk配置，以及任务配置</li>
+</ul>
+<pre><code class="yml"><span class="attr">regCenter:</span>
+<span class="attr">  serverList:</span> <span class="attr">localhost:2181</span>
+<span class="attr">  namespace:</span> <span class="string">elastic-job-lite-springboot</span>
+
+<span class="attr">simpleJob:</span>
+<span class="attr">  cron:</span> <span class="number">0</span><span class="string">/5</span> <span class="string">*</span> <span class="string">*</span> <span class="string">*</span> <span class="string">*</span> <span class="string">?</span>
+<span class="attr">  shardingTotalCount:</span> <span class="number">3</span>
+<span class="attr">  shardingItemParameters:</span> <span class="number">0</span><span class="string">=Beijing,1=Shanghai,2=Guangzhou</span>
+
+</code></pre>
+<ul>
+<li>SpringSimpleJob.java: Job类</li>
+</ul>
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringSimpleJob</span> <span class="keyword">implements</span> <span class="title">SimpleJob</span> </span>{
+
+    <span class="meta">@Resource</span>
+    <span class="keyword">private</span> FooRepository fooRepository;
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(<span class="keyword">final</span> ShardingContext shardingContext)</span> </span>{
+        System.out.println(String.format(<span class="string">"Item: %s | Time: %s | Thread: %s | %s"</span>,
+                shardingContext.getShardingItem(), <span class="keyword">new</span> SimpleDateFormat(<span class="string">"HH:mm:ss"</span>).format(<span class="keyword">new</span> Date()), Thread.currentThread().getId(), <span class="string">"SIMPLE"</span>));
+        List&lt;Foo&gt; data = fooRepository.findTodoData(shardingContext.getShardingParameter(), <span class="number">10</span>);
+        <span class="keyword">for</span> (Foo each : data) {
+            fooRepository.setCompleted(each.getId());
+        }
+    }
+}
+</code></pre>
+<ul>
+<li><p>运行结果<br><img src="/assets/2018/elstic-job/elastic-job-eg-1.png" width="800" div="" align="center"></p>
+</li>
+<li><p>zk节点分布<br><img src="/assets/2018/elstic-job/elastic-job-zk.jpg" width="800" div="" align="center"></p>
+<h3 id="基于elastic-job-lite-spring-boot-starter构架，更简单"><a href="#基于elastic-job-lite-spring-boot-starter构架，更简单" class="headerlink" title="基于elastic-job-lite-spring-boot-starter构架，更简单"></a>基于elastic-job-lite-spring-boot-starter构架，更简单</h3><ul>
+<li>pom.xml：依赖</li>
+</ul>
+</li>
+</ul>
+<pre><code class="xml"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>
+    ...
+    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.kuhn-he<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>elastic-job-lite-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.52<span class="tag">&lt;/<span class="name">version</span>&gt;</span>
+    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
+    ...
+<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>
+</code></pre>
+<ul>
+<li>application.yml:zk配置，以及任务配置</li>
+</ul>
+<pre><code class="yml"><span class="attr">elaticjob:</span>
+<span class="attr">  zookeeper:</span>
+<span class="attr">    server-lists:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:2181</span>
+<span class="attr">    namespace:</span> <span class="string">elastic-job-lite-demo</span>
+
+</code></pre>
+<ul>
+<li>MyJob.java: Job类</li>
+</ul>
+<pre><code class="java"><span class="meta">@ElasticSimpleJob</span>(cron = <span class="string">"*/10 * * * * ?"</span>,jobName = <span class="string">"MyJob"</span>,jobParameter = <span class="string">"1~2~"</span>)
+<span class="meta">@Component</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyJob</span> <span class="keyword">implements</span> <span class="title">SimpleJob</span> </span>{
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(ShardingContext arg0)</span> </span>{
+        System.out.println(<span class="string">"hello,ElasticSimpleJob--&gt;"</span> + System.currentTimeMillis());
+    }
+}
+</code></pre>
+<p>启动SpringBootMain，一样的效果。</p>
+<p>后面会针对源码，进行深入了解。</p>
 
       
 
@@ -194,7 +313,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">elastic-job</a>
         		</li>
       		
 		</ul>
@@ -250,7 +369,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/08/Elastic-Job项目源码-架构原理探索/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,18 +383,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/12/05/你对作业怎么看/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/12/11/Dubbo源码学习-3-集群容错Invoker/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          你对&#34;作业&#34;怎么看?
+          Dubbo源码学习-3-集群容错Invoker
         
       </div>
     </a>
   
   
-    <a href="/2018/11/17/怎样成为Dubbo的贡献者/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">怎样成为dubbo的贡献者</div>
+    <a href="/2018/12/06/Dubbo源码学习-2-SPI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">dubbo源码学习-2-SPI</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//wangweiufofly.github.io">
-  <title>Dubbo源码学习-序 | Yeling的博客</title>
+  <title>Dubbo源码学习-6-集群容错LoadBalance | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
+  <meta name="description" content="码农，Java服务端菜鸟一枚。">
 <meta name="keywords" content="Dubbo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dubbo源码学习-序">
-<meta property="og:url" content="//wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/index.html">
+<meta property="og:title" content="Dubbo源码学习-6-集群容错LoadBalance">
+<meta property="og:url" content="//wangweiufofly.github.io/2018/12/11/Dubbo源码学习-6-集群容错LoadBalance/index.html">
 <meta property="og:site_name" content="Yeling的博客">
-<meta property="og:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
+<meta property="og:description" content="码农，Java服务端菜鸟一枚。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-jiagou.png">
-<meta property="og:updated_time" content="2018-12-05T11:53:18.642Z">
+<meta property="og:updated_time" content="2018-12-12T13:15:57.454Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo源码学习-序">
-<meta name="twitter:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
-<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
+<meta name="twitter:title" content="Dubbo源码学习-6-集群容错LoadBalance">
+<meta name="twitter:description" content="码农，Java服务端菜鸟一枚。">
   
     <link rel="alternative" href="/atom.xml" title="Yeling的博客" type="application/atom+xml">
   
@@ -152,36 +149,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Dubbo源码学习-1-序" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-Dubbo源码学习-6-集群容错LoadBalance" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Dubbo源码学习-序
+      Dubbo源码学习-6-集群容错LoadBalance
     </h1>
   
 
         
-        <a href="/2018/12/02/Dubbo源码学习-1-序/" class="archive-article-date">
-  	<time datetime="2018-12-02T06:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-02</time>
+        <a href="/2018/12/11/Dubbo源码学习-6-集群容错LoadBalance/" class="archive-article-date">
+  	<time datetime="2018-12-11T06:48:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。</li>
-</ul>
-<h2 id="dubbo的架构"><a href="#dubbo的架构" class="headerlink" title="dubbo的架构"></a>dubbo的架构</h2><p><img src="/assets/2018/dubbo/dubbo-liuchengtu.png" width="1000" div="" align="center"></p>
-<a id="more"></a>
-<h2 id="dubbo的技术点分解"><a href="#dubbo的技术点分解" class="headerlink" title="dubbo的技术点分解"></a>dubbo的技术点分解</h2><p><img src="/assets/2018/dubbo/dubbo-jiagou.png" width="1000" div="" align="center"></p>
-<ul>
-<li>后面继续学习知识点</li>
-</ul>
-
+        
       
 
       
@@ -250,7 +238,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/11/Dubbo源码学习-6-集群容错LoadBalance/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,18 +252,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/12/05/你对作业怎么看/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/12/12/Elastic-Job项目源码-任务init/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          你对&#34;作业&#34;怎么看?
+          Elastic-Job项目源码-任务init
         
       </div>
     </a>
   
   
-    <a href="/2018/11/17/怎样成为Dubbo的贡献者/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">怎样成为dubbo的贡献者</div>
+    <a href="/2018/12/11/Dubbo源码学习-5-集群容错Route/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Dubbo源码学习-5-集群容错Route</div>
       <i class="icon-circle-right"></i>
     </a>
   

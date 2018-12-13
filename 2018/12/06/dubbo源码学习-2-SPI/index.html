@@ -8,20 +8,18 @@
   <link rel="dns-prefetch" href="//wangweiufofly.github.io">
   <title>dubbo源码学习-2-SPI | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SPIService Provider Interface,服务提供接口，是指的一种服务发现机制。 JDK-SPI and Dubbo-SPI">
+  <meta name="description" content="分布式与集群 分布式：一个业务分拆多个子业务，部署在不同的服务器上 集群：同一个业务，部署在多个服务器上  Dubbo 服务治理">
 <meta name="keywords" content="Dubbo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dubbo源码学习-2-SPI">
-<meta property="og:url" content="//wangweiufofly.github.io/2018/12/06/dubbo源码学习-2-SPI/index.html">
+<meta property="og:url" content="//wangweiufofly.github.io/2018/12/06/Dubbo源码学习-2-SPI/index.html">
 <meta property="og:site_name" content="Yeling的博客">
-<meta property="og:description" content="SPIService Provider Interface,服务提供接口，是指的一种服务发现机制。 JDK-SPI and Dubbo-SPI">
+<meta property="og:description" content="分布式与集群 分布式：一个业务分拆多个子业务，部署在不同的服务器上 集群：同一个业务，部署在多个服务器上  Dubbo 服务治理">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/spi.png">
-<meta property="og:updated_time" content="2018-12-06T05:48:06.659Z">
+<meta property="og:updated_time" content="2018-12-11T06:12:03.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dubbo源码学习-2-SPI">
-<meta name="twitter:description" content="SPIService Provider Interface,服务提供接口，是指的一种服务发现机制。 JDK-SPI and Dubbo-SPI">
-<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/dubbo/spi.png">
+<meta name="twitter:description" content="分布式与集群 分布式：一个业务分拆多个子业务，部署在不同的服务器上 集群：同一个业务，部署在多个服务器上  Dubbo 服务治理">
   
     <link rel="alternative" href="/atom.xml" title="Yeling的博客" type="application/atom+xml">
   
@@ -151,7 +149,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-dubbo源码学习-2-SPI" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-Dubbo源码学习-2-SPI" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -163,7 +161,7 @@
   
 
         
-        <a href="/2018/12/06/dubbo源码学习-2-SPI/" class="archive-article-date">
+        <a href="/2018/12/06/Dubbo源码学习-2-SPI/" class="archive-article-date">
   	<time datetime="2018-12-06T02:33:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
 </a>
         
@@ -171,9 +169,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h2><p>Service Provider Interface,服务提供接口，是指的一种服务发现机制。</p>
-<h2 id="JDK-SPI-and-Dubbo-SPI"><a href="#JDK-SPI-and-Dubbo-SPI" class="headerlink" title="JDK-SPI and Dubbo-SPI"></a>JDK-SPI and Dubbo-SPI</h2><p><img src="/assets/2018/dubbo/spi.png" width="1000" div="" align="center"></p>
-<a id="more"></a>
+        <h2 id="分布式与集群"><a href="#分布式与集群" class="headerlink" title="分布式与集群"></a>分布式与集群</h2><ul>
+<li>分布式：一个业务分拆多个子业务，部署在不同的服务器上</li>
+<li>集群：同一个业务，部署在多个服务器上</li>
+</ul>
+<h2 id="Dubbo-服务治理"><a href="#Dubbo-服务治理" class="headerlink" title="Dubbo 服务治理"></a>Dubbo 服务治理</h2><a id="more"></a>
 <h2 id="一、Dubbo-getAdaptiveExtension-方法"><a href="#一、Dubbo-getAdaptiveExtension-方法" class="headerlink" title="一、Dubbo getAdaptiveExtension() 方法"></a>一、Dubbo getAdaptiveExtension() 方法</h2><ul>
 <li>2种情况<h4 id="Adaptive在扩展类上"><a href="#Adaptive在扩展类上" class="headerlink" title="@Adaptive在扩展类上"></a>@Adaptive在扩展类上</h4></li>
 </ul>
@@ -275,7 +275,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/06/dubbo源码学习-2-SPI/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/06/Dubbo源码学习-2-SPI/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -289,9 +289,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/12/08/Elastic-Job项目源码-架构原理探索/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Elastic-Job项目源码-架构原理探索
+        
+      </div>
+    </a>
   
-    <a href="/2018/12/02/Dubbo源码学习-1-序/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Dubbo源码学习-序</div>
+  
+    <a href="/2018/12/05/你对作业怎么看/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">你对&#34;作业&#34;怎么看?</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -422,6 +431,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">elastic-job</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,23 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//wangweiufofly.github.io">
-  <title>Dubbo源码学习-序 | Yeling的博客</title>
+  <title>营销活动&amp;优惠券架构设计 | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
-<meta name="keywords" content="Dubbo">
+  <meta name="description" content="[TOC] 优惠券的生命周期和设计实现优惠券作为一种重要营销手段, 每张优惠券的生命周期以下几个链路组成 投放投放是指在创建优惠券之前，需要确定优惠券是投放在哪个渠道，用什么形式投放？会有怎样的成本收益，如何与其他效果差异等等？ 把投放放在最前面，是指我们在制券的时候已经对券要投放在哪个渠道有了认识，相当于你要做一个活动，先确定活动的框架，再搭活动中的细节，完成每个事项，然后推动活动上线，最后回收">
+<meta name="keywords" content="业务架构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dubbo源码学习-序">
-<meta property="og:url" content="//wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/index.html">
+<meta property="og:title" content="营销活动&amp;优惠券架构设计">
+<meta property="og:url" content="//wangweiufofly.github.io/2018/11/01/营销活动-优惠券架构设计/index.html">
 <meta property="og:site_name" content="Yeling的博客">
-<meta property="og:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
+<meta property="og:description" content="[TOC] 优惠券的生命周期和设计实现优惠券作为一种重要营销手段, 每张优惠券的生命周期以下几个链路组成 投放投放是指在创建优惠券之前，需要确定优惠券是投放在哪个渠道，用什么形式投放？会有怎样的成本收益，如何与其他效果差异等等？ 把投放放在最前面，是指我们在制券的时候已经对券要投放在哪个渠道有了认识，相当于你要做一个活动，先确定活动的框架，再搭活动中的细节，完成每个事项，然后推动活动上线，最后回收">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-jiagou.png">
-<meta property="og:updated_time" content="2018-12-05T11:53:18.642Z">
+<meta property="og:image" content="http://blog.hyfzc.cn/wp-content/uploads/2018/11/优惠券投放渠道.jpg">
+<meta property="og:image" content="http://blog.hyfzc.cn/wp-content/uploads/2018/11/coupon2.jpg">
+<meta property="og:image" content="http://blog.hyfzc.cn/wp-content/uploads/2018/11/营销活动模型.jpg">
+<meta property="og:image" content="http://blog.hyfzc.cn/wp-content/uploads/2018/11/优惠券平台架构.jpg">
+<meta property="og:updated_time" content="2018-12-13T12:30:57.204Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo源码学习-序">
-<meta name="twitter:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
-<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
+<meta name="twitter:title" content="营销活动&amp;优惠券架构设计">
+<meta name="twitter:description" content="[TOC] 优惠券的生命周期和设计实现优惠券作为一种重要营销手段, 每张优惠券的生命周期以下几个链路组成 投放投放是指在创建优惠券之前，需要确定优惠券是投放在哪个渠道，用什么形式投放？会有怎样的成本收益，如何与其他效果差异等等？ 把投放放在最前面，是指我们在制券的时候已经对券要投放在哪个渠道有了认识，相当于你要做一个活动，先确定活动的框架，再搭活动中的细节，完成每个事项，然后推动活动上线，最后回收">
+<meta name="twitter:image" content="http://blog.hyfzc.cn/wp-content/uploads/2018/11/优惠券投放渠道.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Yeling的博客" type="application/atom+xml">
   
@@ -152,34 +154,144 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Dubbo源码学习-1-序" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-营销活动-优惠券架构设计" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Dubbo源码学习-序
+      营销活动&amp;优惠券架构设计
     </h1>
   
 
         
-        <a href="/2018/12/02/Dubbo源码学习-1-序/" class="archive-article-date">
-  	<time datetime="2018-12-02T06:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-02</time>
+        <a href="/2018/11/01/营销活动-优惠券架构设计/" class="archive-article-date">
+  	<time datetime="2018-11-01T08:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。</li>
-</ul>
-<h2 id="dubbo的架构"><a href="#dubbo的架构" class="headerlink" title="dubbo的架构"></a>dubbo的架构</h2><p><img src="/assets/2018/dubbo/dubbo-liuchengtu.png" width="1000" div="" align="center"></p>
+        <p>[TOC]</p>
+<h2 id="优惠券的生命周期和设计实现"><a href="#优惠券的生命周期和设计实现" class="headerlink" title="优惠券的生命周期和设计实现"></a>优惠券的生命周期和设计实现</h2><p>优惠券作为一种重要营销手段, 每张优惠券的生命周期以下几个链路组成</p>
+<h3 id="投放"><a href="#投放" class="headerlink" title="投放"></a>投放</h3><p>投放是指在创建优惠券之前，需要确定优惠券是投放在哪个渠道，用什么形式投放？会有怎样的成本收益，如何与其他效果差异等等？</p>
+<p>把投放放在最前面，是指我们在制券的时候已经对券要投放在哪个渠道有了认识，相当于你要做一个活动，先确定活动的框架，再搭活动中的细节，完成每个事项，然后推动活动上线，最后回收上线数据，前提是你要先确定这次活动的目标和形式。</p>
+<h4 id="1、投放渠道"><a href="#1、投放渠道" class="headerlink" title="1、投放渠道"></a>1、投放渠道</h4><p>投放渠道分端内和端外，覆盖产品的主要补贴渠道。</p>
+<p><img class="alignnone size-full wp-image-67" src="http://blog.hyfzc.cn/wp-content/uploads/2018/11/优惠券投放渠道.jpg" alt="" width="700"></p>
 <a id="more"></a>
-<h2 id="dubbo的技术点分解"><a href="#dubbo的技术点分解" class="headerlink" title="dubbo的技术点分解"></a>dubbo的技术点分解</h2><p><img src="/assets/2018/dubbo/dubbo-jiagou.png" width="1000" div="" align="center"></p>
+<h4 id="2、投放形式"><a href="#2、投放形式" class="headerlink" title="2、投放形式"></a>2、投放形式</h4><h5 id="1）接口红包"><a href="#1）接口红包" class="headerlink" title="1）接口红包"></a>1）接口红包</h5><p>将发券接口封装好提供给其他页面框架，实现发券功能，如领券专区，用户前端点击行为触发后端请求给用户账户放一张券，用户根据意愿领取行为；</p>
+<h5 id="2）兑换码"><a href="#2）兑换码" class="headerlink" title="2）兑换码"></a>2）兑换码</h5><p>根据优惠码兑换优惠券，有中文和英文字符两种形式，主要用户定向发放给某些用户，需要用户手动输入或复制至兑换处，转化率低；</p>
+<h5 id="3）H5领取页"><a href="#3）H5领取页" class="headerlink" title="3）H5领取页"></a>3）H5领取页</h5><p>使用最频繁的领券方式，常用于渠道合作，当年满天飞的滴滴红包就是典型的案例，标配模板支持替换头图，读取用户微信昵称，含登录组件，输入手机号码即可领券到账，多用于产品外部环境，用户需要收入手机号码或者登录领取，配合活动</p>
+<h5 id="4）绑券"><a href="#4）绑券" class="headerlink" title="4）绑券"></a>4）绑券</h5><p>是指运营通过后台将优惠券绑定到某些用户账户的发券方式</p>
+<h5 id="5）系统自动触发"><a href="#5）系统自动触发" class="headerlink" title="5）系统自动触发"></a>5）系统自动触发</h5><p>天降红包即系统自动触发的一种形式，打开APP行为调起发券请求；还有例如打开滴滴划到代驾页面会收到一张代驾券和短信，饿了么送单迟到后系统自动补偿券等，均是根据一定的规则系统自动触发券的形式，其实也是在发券接口基础上二次开发的机制。</p>
+<h3 id="优惠券创建"><a href="#优惠券创建" class="headerlink" title="优惠券创建"></a>优惠券创建</h3><h4 id="优惠券模型"><a href="#优惠券模型" class="headerlink" title="优惠券模型"></a>优惠券模型</h4><p><img class="alignnone size-full wp-image-65" src="http://blog.hyfzc.cn/wp-content/uploads/2018/11/coupon2.jpg" alt="" width="900"></p>
+<h3 id="优惠券发放"><a href="#优惠券发放" class="headerlink" title="优惠券发放"></a>优惠券发放</h3><h4 id="1、发放人群"><a href="#1、发放人群" class="headerlink" title="1、发放人群"></a>1、发放人群</h4><ul>
+<li><p><strong>用户属性：</strong><br>新用户、老用户、下单用户、会员等；</p>
+</li>
+<li><p><strong>地理围栏：</strong><br>手动划分的服务区、某个活动商圈或商家、白领集中的CBD区等；</p>
+</li>
+<li><p><strong>用户生命周期：</strong><br>根据用户生命周期标签判断什么用户发什么券，可在发券工具中关联券ID和用户标签，用户标签抽取自标签系统，根据运营需求灵活定义一部分标签用户。也可以在创建券时自定义（历史或近N天)累计订单数和末购时间天数，将判断用户生命周期的特征和属性值设计成自定义模式，这样设计的好处是建券时即可关联符合条件的用户，适用于简单的用户筛选；</p>
+</li>
+<li><p><strong>优惠敏感度：</strong><br>在之前的文章中有介绍过优惠敏感度模型，根据数据模型判断给每个用户打一个敏感值，并划定在什么范围内的属于最敏感，其次是中高敏、中敏、低敏等，建券时选择此项并填写上敏感度值范围即可实现对符合条件的用户发券；</p>
+</li>
+<li><p><strong>流失概率：</strong><br>根据流失预警模型计算出来每个用户流失的概率值，发券时关联一定值范围内的用户即可；</p>
+</li>
+<li><p><strong>补贴率：</strong><br>补贴率主要适用于老用户，根据用户前N天的订单补贴情况来定给用户发什么金额的券，这里提醒下，补贴率=订单抵扣金额/订单原价</p>
+</li>
+<li><p><strong>是否安装竞对APP：</strong><br>出于一定的黑科技，能够判断用户是否安装了竞品APP（我们其实真的活在裸奔的时代），然后给安装竞品的用户发更高额的券，这就和我们在有竞对的城市或竞对比较强的城市实施更有利的用户策略一样；</p>
+</li>
+</ul>
+<p>以上几种用户身份判断均需要额外的数据开发工作，将标签接口化输入到券系统中。</p>
+<h4 id="2、外在条件"><a href="#2、外在条件" class="headerlink" title="2、外在条件"></a>2、外在条件</h4><p>如天气是否恶劣，实际上天气对大部分业务的影响都很大、节日节气、当地风俗等对订单产生影响的客观因素；</p>
+<h4 id="3、发放规则"><a href="#3、发放规则" class="headerlink" title="3、发放规则"></a>3、发放规则</h4><p>如账户内有未过期的排斥券则不在发放、账户内有新手券则判断发老用户券、用户要过风控规则等；</p>
+<h4 id="4、发放工具"><a href="#4、发放工具" class="headerlink" title="4、发放工具"></a>4、发放工具</h4><p>发放工具与投放渠道和投放形式一致：</p>
 <ul>
-<li>后面继续学习知识点</li>
+<li>如果投放在渠道合作，则可以选择跳转红包配置后台，红包文案和皮肤配置完成后生产链接或二维码输出；</li>
+<li>如果投放的是兑换码，则跳转兑换码生成后台，配置完成提供excel下载功能；其他形式亦然，从制券跳转配置发券工具，完成制券到投放的过程；</li>
+</ul>
+<h3 id="优惠券使用"><a href="#优惠券使用" class="headerlink" title="优惠券使用"></a>优惠券使用</h3><h4 id="1、使用规则"><a href="#1、使用规则" class="headerlink" title="1、使用规则"></a>1、使用规则</h4><p>使用规则关联的是到账户的券要符合哪些条件才可以使用，有些时候满足发券条件却不满足使用条件，运营需要避免发到用户账户内的券不可使用的情况减少投诉，如用户从2个渠道收到2张新手券，再使用第二张的时候却被告知已不是新用户了，这里就是在使用条件出做了用户身份判断，最好的方式还是让用户的账户内一直保持仅有一张新手券；</p>
+<h4 id="2、使用渠道"><a href="#2、使用渠道" class="headerlink" title="2、使用渠道"></a>2、使用渠道</h4><p>APP、小程序等渠道；</p>
+<h4 id="3、使用时间段"><a href="#3、使用时间段" class="headerlink" title="3、使用时间段"></a>3、使用时间段</h4><p>限制早高峰、晚高峰，通过时间段的限制引导用户分散消费，缓解运力或配送的压力；</p>
+<h4 id="4、业务模式"><a href="#4、业务模式" class="headerlink" title="4、业务模式"></a>4、业务模式</h4><p>限制自营模式使用、限制代理商模式使用；</p>
+<h4 id="5、地理围栏"><a href="#5、地理围栏" class="headerlink" title="5、地理围栏"></a>5、地理围栏</h4><p>使用城市或区域限制，如出行类业务异地场景需求大，服务仅开了几个城市，但是发券是针对全国发放的，则需要限制哪些城市可用，且需要明确告知用户；</p>
+<h4 id="6、用户属性"><a href="#6、用户属性" class="headerlink" title="6、用户属性"></a>6、用户属性</h4><p>除了以上针对标签用户发券，用券主要是限制新老用户，避免上述新客领取到多张新手券使用的情况；</p>
+<p>以上所有规则在选定以后，系统都需要根据所选项生成相应的文案释义。</p>
+<h3 id="优惠券使用统计"><a href="#优惠券使用统计" class="headerlink" title="优惠券使用统计"></a>优惠券使用统计</h3><h4 id="1、核销状态"><a href="#1、核销状态" class="headerlink" title="1、核销状态"></a>1、核销状态</h4><p>发出去的券，有多少张已被使用，多少还未使用，到达一定天数后，运营可以配置是否选择对未使用用户设置短信或push使用提醒；</p>
+<h4 id="2、使用和成本统计"><a href="#2、使用和成本统计" class="headerlink" title="2、使用和成本统计"></a>2、使用和成本统计</h4><p>发出去多少张，用了多少张，使用率是多少，单均实付，补贴率，订单总体GMV，人均用券张数等维度的统计，不同活跃度的用户用券占比多少，用券失败率多少，共花费了多少预算，时间日期维度的使用曲线是怎样的，运营可以根据所需维度提出需求开发相应统计报表；</p>
+<h2 id="架构可扩展的定义"><a href="#架构可扩展的定义" class="headerlink" title="架构可扩展的定义"></a>架构可扩展的定义</h2><ul>
+<li><p><strong>业务扩展</strong><br>变更或新增业务逻辑时, 尽量对已有的核心模块影响最小,保证系统整体的稳定性.</p>
+</li>
+<li><p><strong>性能扩展</strong><br>保证系统是可以水平扩展的, 从而具有应对更高的负载能力.</p>
+</li>
+</ul>
+<p>一个系统的稳定性,除了需要由健壮的代码来保证外, 架构上的拆分,也会有相当大的影响.比如:我们将易变的模块(需求变化频繁)和稳定的模块糅合在一起部署的话, 易变模块的变化造成整个系统频繁的部署,就会对整个系统带来极大的风险.所以扩展性在系统设计之初就需要着重考虑.</p>
+<h2 id="功能和性能需求"><a href="#功能和性能需求" class="headerlink" title="功能和性能需求"></a>功能和性能需求</h2><p>从功能和性能需求上对要做的优惠券系统有个整体上的认识, 来看看哪些需求是易变的,哪些需求是稳定的.</p>
+<h3 id="发券"><a href="#发券" class="headerlink" title="发券"></a>发券</h3><h4 id="优惠券活动管理"><a href="#优惠券活动管理" class="headerlink" title="优惠券活动管理"></a>优惠券活动管理</h4><p>运营人员根据促销档期和财务计划, 制定优惠券活动的方案,包括:</p>
+<ul>
+<li><strong>发券方式:</strong><br>用户主动领取还是被动接收</li>
+<li><strong>发券内容:</strong><br>发券的种类, 发券数量, 是否多种券组合发放.</li>
+<li><strong>促销方式:</strong><br>见下文</li>
+<li><strong>使用限制:</strong><br>见下文</li>
+<li><strong>通知方式:</strong><br>短信通知,邮件通知,app通知</li>
+</ul>
+<h4 id="优惠券发券"><a href="#优惠券发券" class="headerlink" title="优惠券发券"></a>优惠券发券</h4><p>从瞬时单次发券的用户数量来看, 发券活动分为</p>
+<ul>
+<li><p><strong>对单用户发券:</strong><br>用户大促抽奖领券,新用户注册领券,订单完成后返券以及对投诉用户补偿券时会采用这种领券活动.<br>从功能上看,对单用户发券的玩法多种多样,属于易变的需求.<br>从性能上看,单用户发券请求量较高,同时也非常强调券到账的及时性,在用户发出领券请求后,系统应当尽快将券送达账户.</p>
+</li>
+<li><p><strong>对多用户发券:</strong><br>从功能上看,在补贴大战,提升交易额以及唤醒沉睡的老用户时会采用,一般会结合短信通知和邮件通知的方式来让用户知晓有券到账. 多用户发券的业务较为稳定,一般是运营人员通过后台选择特定范围内用户列表后触发.<br>从性能上看,对多用户发券的请求量较小,但发券量比较大,可能一次发放上百万张券到用户,所以多用户发券更强调发券系统的稳定性.</p>
+</li>
+</ul>
+<h3 id="用券"><a href="#用券" class="headerlink" title="用券"></a>用券</h3><h4 id="促销方式"><a href="#促销方式" class="headerlink" title="促销方式"></a>促销方式</h4><p>从券的促销方式来看, 优惠券种类一般有:</p>
+<ul>
+<li><strong>立减:</strong><br>优惠金额固定的优惠券, 比如我们现在的现金券.</li>
+<li><strong>折扣:</strong><br>优惠金额跟订单金额成比例的优惠券, 目前我们这边不需要.</li>
+<li><strong>其他促销</strong></li>
+</ul>
+<p>不同的优惠券促销方式, 会对应不同的优惠金额计算逻辑.</p>
+<h4 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h4><p>从用户使用角度看, 优惠券还会有多种使用限制:</p>
+<ul>
+<li><strong>限时间:</strong><br>优惠券的有效期</li>
+<li><strong>限平台</strong><br>比如设定一种券只能在微信h5平台上使用</li>
+<li><strong>限地域</strong><br>比如只能在上海使用该优惠券</li>
+<li><strong>其他限制</strong></li>
+</ul>
+<p>限制逻辑保证了优惠券促销花的钱,都用到了提升对应维度的运营数据上.</p>
+<h3 id="需求总结"><a href="#需求总结" class="headerlink" title="需求总结"></a>需求总结</h3><h4 id="易变的需求"><a href="#易变的需求" class="headerlink" title="易变的需求"></a>易变的需求</h4><ul>
+<li><strong>对单用户发券的方式(请求量大)</strong></li>
+</ul>
+<h4 id="稳定的需求"><a href="#稳定的需求" class="headerlink" title="稳定的需求:"></a>稳定的需求:</h4><ul>
+<li><strong>发券活动管理(请求量小)</strong></li>
+<li><strong>对多用户发券的方式(请求量小)</strong></li>
+<li><strong>优惠券的促销方式</strong></li>
+<li><strong>优惠券的使用限制</strong></li>
+</ul>
+<h2 id="营销活动架构实现"><a href="#营销活动架构实现" class="headerlink" title="营销活动架构实现"></a>营销活动架构实现</h2><h3 id="营销活动整体架构"><a href="#营销活动整体架构" class="headerlink" title="营销活动整体架构"></a>营销活动整体架构</h3><p><img class="alignnone size-full wp-image-64" src="http://blog.hyfzc.cn/wp-content/uploads/2018/11/营销活动模型.jpg" alt="" width="900"></p>
+<h4 id="优惠券活动平台架构"><a href="#优惠券活动平台架构" class="headerlink" title="优惠券活动平台架构"></a>优惠券活动平台架构</h4><p>根据功能与性能需求,我们对优惠券系统模块做以下划分:<br><img class="alignnone size-full wp-image-66" src="http://blog.hyfzc.cn/wp-content/uploads/2018/11/优惠券平台架构.jpg" alt="" width="900"></p>
+<h4 id="活动平台"><a href="#活动平台" class="headerlink" title="活动平台"></a>活动平台</h4><p>营销活动平台作为营销活动的入口系统，活动系统提供以下API:</p>
+<ul>
+<li><strong>活动管理API</strong><br>提供活动管理的功能，新增，修改，上下架等操作；</li>
+</ul>
+<h4 id="优惠券平台"><a href="#优惠券平台" class="headerlink" title="优惠券平台"></a>优惠券平台</h4><p>优惠券系统作为核心系统,需要应对极大的访问量. 服务需要水平扩展,优惠券平台提供以下API:</p>
+<ul>
+<li><p><strong>优惠券管理API</strong></p>
+<p>  提供优惠券的创建，修改，下架等管理API，供运营人员使用</p>
+</li>
+<li><p><strong>单用户发券API</strong></p>
+</li>
+<li><p><strong>批量发券API</strong></p>
+<p>  单用户发券API将单用户发券API和批量发券API拆分是因为两个接口的使用场景不太一样:批量发券的发券量非常大,但时效性要求不高, 可以做更多的优化.</p>
+</li>
+<li><p><strong>查询优惠券API</strong></p>
+<p>  提供查询所有优惠券和查询订单页可用优惠券的功能。</p>
+</li>
+<li><p><strong>优惠券核销API</strong></p>
+<p>  提供订单下单功能的核销模块。</p>
+</li>
+</ul>
+<h4 id="优惠券数据统计平台"><a href="#优惠券数据统计平台" class="headerlink" title="优惠券数据统计平台"></a>优惠券数据统计平台</h4><ul>
+<li>通过读取线上优惠券数据的备份,进行数据报表生成的平台, 提供运营数据分析使用.</li>
 </ul>
 
       
@@ -194,7 +306,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">业务架构</a>
         		</li>
       		
 		</ul>
@@ -250,7 +362,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/11/01/营销活动-优惠券架构设计/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,18 +376,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/12/05/你对作业怎么看/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/11/17/怎样成为Dubbo的贡献者/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          你对&#34;作业&#34;怎么看?
+          怎样成为dubbo的贡献者
         
       </div>
     </a>
   
   
-    <a href="/2018/11/17/怎样成为Dubbo的贡献者/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">怎样成为dubbo的贡献者</div>
+    <a href="/2018/10/15/延时消息设计/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">延时消息设计</div>
       <i class="icon-circle-right"></i>
     </a>
   

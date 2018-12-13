@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//wangweiufofly.github.io">
-  <title>Dubbo源码学习-序 | Yeling的博客</title>
+  <title>你对&#34;作业&#34;怎么看? | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
-<meta name="keywords" content="Dubbo">
+  <meta name="description" content="什么是作业? 我们不是小学生的课堂作业，在这里，作业即定时任务.无需做复杂的控制,在指定的时间执行指定的任务.  为什么需要作业?时间驱动/事件驱动: 内部系统一般可以通过事件来驱动,但涉及到外部系统,则只能使用时间驱动.  如：抓取外部系统价格.每小时抓取，由于是外部系统,不能像内部系统一样发送事件触发事件. 批量处理/逐条处理：批量处理堆积的数据更加高效,在不需要实时性的情况下比消息中间件更有">
+<meta name="keywords" content="elastic-job">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dubbo源码学习-序">
-<meta property="og:url" content="//wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/index.html">
+<meta property="og:title" content="你对&quot;作业&quot;怎么看?">
+<meta property="og:url" content="//wangweiufofly.github.io/2018/12/05/你对作业怎么看/index.html">
 <meta property="og:site_name" content="Yeling的博客">
-<meta property="og:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
+<meta property="og:description" content="什么是作业? 我们不是小学生的课堂作业，在这里，作业即定时任务.无需做复杂的控制,在指定的时间执行指定的任务.  为什么需要作业?时间驱动/事件驱动: 内部系统一般可以通过事件来驱动,但涉及到外部系统,则只能使用时间驱动.  如：抓取外部系统价格.每小时抓取，由于是外部系统,不能像内部系统一样发送事件触发事件. 批量处理/逐条处理：批量处理堆积的数据更加高效,在不需要实时性的情况下比消息中间件更有">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
-<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-jiagou.png">
-<meta property="og:updated_time" content="2018-12-05T11:53:18.642Z">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/xxl-job-jiagou.png">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/elastic-job-lite-jiagou.png">
+<meta property="og:updated_time" content="2018-12-13T12:31:51.338Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo源码学习-序">
-<meta name="twitter:description" content="前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。  dubbo的架构">
-<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/dubbo/dubbo-liuchengtu.png">
+<meta name="twitter:title" content="你对&quot;作业&quot;怎么看?">
+<meta name="twitter:description" content="什么是作业? 我们不是小学生的课堂作业，在这里，作业即定时任务.无需做复杂的控制,在指定的时间执行指定的任务.  为什么需要作业?时间驱动/事件驱动: 内部系统一般可以通过事件来驱动,但涉及到外部系统,则只能使用时间驱动.  如：抓取外部系统价格.每小时抓取，由于是外部系统,不能像内部系统一样发送事件触发事件. 批量处理/逐条处理：批量处理堆积的数据更加高效,在不需要实时性的情况下比消息中间件更有">
+<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/xxl-job-jiagou.png">
   
     <link rel="alternative" href="/atom.xml" title="Yeling的博客" type="application/atom+xml">
   
@@ -152,35 +152,81 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Dubbo源码学习-1-序" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-你对作业怎么看" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Dubbo源码学习-序
+      你对&#34;作业&#34;怎么看?
     </h1>
   
 
         
-        <a href="/2018/12/02/Dubbo源码学习-1-序/" class="archive-article-date">
-  	<time datetime="2018-12-02T06:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-02</time>
+        <a href="/2018/12/05/你对作业怎么看/" class="archive-article-date">
+  	<time datetime="2018-12-05T03:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>前段时间有幸参加Dubbo2.7新特性,Nacos,的一次开源分享会，打算好好阅读下dubbo的源码，记录下。</li>
+        <h1 id="什么是作业"><a href="#什么是作业" class="headerlink" title="什么是作业?"></a>什么是作业?</h1><ul>
+<li>我们不是小学生的课堂作业，在这里，作业即定时任务.无需做复杂的控制,在指定的时间执行指定的任务.</li>
 </ul>
-<h2 id="dubbo的架构"><a href="#dubbo的架构" class="headerlink" title="dubbo的架构"></a>dubbo的架构</h2><p><img src="/assets/2018/dubbo/dubbo-liuchengtu.png" width="1000" div="" align="center"></p>
-<a id="more"></a>
-<h2 id="dubbo的技术点分解"><a href="#dubbo的技术点分解" class="headerlink" title="dubbo的技术点分解"></a>dubbo的技术点分解</h2><p><img src="/assets/2018/dubbo/dubbo-jiagou.png" width="1000" div="" align="center"></p>
+<h1 id="为什么需要作业"><a href="#为什么需要作业" class="headerlink" title="为什么需要作业?"></a>为什么需要作业?</h1><p>时间驱动/事件驱动: 内部系统一般可以通过事件来驱动,但涉及到外部系统,则只能使用时间驱动.</p>
 <ul>
-<li>后面继续学习知识点</li>
+<li>如：抓取外部系统价格.每小时抓取，由于是外部系统,不能像内部系统一样发送事件触发事件.</li>
+<li>批量处理/逐条处理：批量处理堆积的数据更加高效,在不需要实时性的情况下比消息中间件更有优势,而且有的业务逻辑只能批量处理.</li>
+<li>系统内部/系统解耦：作业一般封装在系统内部，而消息中间件可用于系统间解耦.</li>
 </ul>
+<a id="more"></a>
+<h1 id="定时任务常用的方式"><a href="#定时任务常用的方式" class="headerlink" title="定时任务常用的方式"></a>定时任务常用的方式</h1><h3 id="一-crontab命令"><a href="#一-crontab命令" class="headerlink" title="一.crontab命令"></a>一.crontab命令</h3><p>系统级别定时程序：<br>这里只讨论linux系统；<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">查看</span><br><span class="line">crontab -l</span><br><span class="line">编辑</span><br><span class="line">crontab -e</span><br><span class="line">*/1 * * * * /Users/kobebryant/Documents/shell/helloworld.sh</span><br><span class="line">*/1 * * * * java -jar ****.jar 运行jar包</span><br><span class="line">最小粒度 分钟</span><br></pre></td></tr></table></figure></p>
+<h3 id="二-Java定时任务"><a href="#二-Java定时任务" class="headerlink" title="二.Java定时任务"></a>二.Java定时任务</h3><h4 id="1-Time，TimerTask"><a href="#1-Time，TimerTask" class="headerlink" title="1.Time，TimerTask"></a>1.Time，TimerTask</h4><h4 id="2-java1-5以后推荐：ScheduledExecutorService"><a href="#2-java1-5以后推荐：ScheduledExecutorService" class="headerlink" title="2.java1.5以后推荐：ScheduledExecutorService"></a>2.java1.5以后推荐：ScheduledExecutorService</h4><ul>
+<li><p>简单的比较：<br>Timer单线程。<br>schedule—period=  -task.period   ——currentTime   - task.period<br>scheduleAtFixedRate—period=  +task.period ——executionTime + task.period<br>源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 任务队列  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TaskQueue queue = <span class="keyword">new</span> TaskQueue();  </span><br><span class="line">    <span class="comment">// 处理线程  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TimerThread thread = <span class="keyword">new</span> TimerThread(queue);  </span><br><span class="line">       run();</span><br><span class="line">task.period&lt;<span class="number">0</span> ? currentTime   - task.period  : executionTime + task.period</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Timer存在的问题：<br>1.多个定时任务的时候便会存在问题：若任务B执行时间过长，将导致任务A延迟了启动时间！<br>2.若任务线程在执行队列中某个任务时，该任务抛出异常，将导致线程因跳出循环体而终止，即Timer停止了工作！</p>
+</li>
+<li><p>ScheduledExecutorService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定时延后开始执行任务，以后每隔period的时长再次执行该任务 </span></span><br><span class="line"><span class="keyword">public</span> ScheduledFuture&lt;?&gt; scheduleAtFixedRate(Runnable command, <span class="keyword">long</span> initialDelay, <span class="keyword">long</span> period, TimeUnit unit); </span><br><span class="line"><span class="comment">//指定时延后开始执行任务，以后任务执行完成后等待delay时长，再次执行任务 public ScheduledFuture&lt;?&gt; scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit);</span></span><br><span class="line"></span><br><span class="line">scheduleAtFixedRate：该方法在initialDelay时长后第一次执行任务，以后每隔period时长，再次执行任务。注意，period是从任务开始执行算起的。开始执行任务后，定时器每隔period时长检查该任务是否完成，如果完成则再次启动任务，否则等该任务结束后才再次启动任务，看下图示例。</span><br><span class="line"></span><br><span class="line">scheduleWithFixDelay：该方法在initialDelay时长后第一次执行任务，以后每当任务执行完成后，等待delay时长，再次执行任务，看下图示例。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="定时任务框架"><a href="#定时任务框架" class="headerlink" title="定时任务框架"></a>定时任务框架</h3><h4 id="Spring-Task定时任务"><a href="#Spring-Task定时任务" class="headerlink" title="Spring Task定时任务"></a>Spring Task定时任务</h4><p>spring scheduler:<br>2种方式，xml和注解<br>大多数喜欢用注解</p>
+<ul>
+<li>坑：这种默认是单线程跑任务，如果任务多，是无法并发的，如果采用此种方法，建议xml配置线程池。</li>
+</ul>
+<h4 id="quartz"><a href="#quartz" class="headerlink" title="quartz"></a>quartz</h4><p>Quartz最重要的3个基本要素：</p>
+<ul>
+<li>Scheduler：调度器。所有的调度都是由它控制。</li>
+<li>Trigger： 触发器。例子中，它的类型是SimpleTrigger，每隔1秒中执行一次（什么是SimpleTrigger下面会有详述）。</li>
+<li>JobDetail &amp; Job： JobDetail 定义的是任务数据，而真正的执行逻辑是在Job中，例子中是HelloQuartz。 为什么设计成JobDetail + Job，不直接使用Job？这是因为任务是有可能并发执行，如果Scheduler直接使用Job，就会存在对同一个Job实例并发访问的问题。而JobDetail &amp; Job 方式，sheduler每次执行，都会根据JobDetail创建一个新的Job实例，这样就可以规避并发访问的问题。</li>
+<li>简单的架构图</li>
+</ul>
+<ul>
+<li>问题：<br>1.单点故障问题，也不敢轻易跟着应用服务多节点部署，可能会重复多次执行而引发系统逻辑的错误。<br>2.quartz的集群仅仅只是用来HA，节点数量的增加并不能给我们的每次执行效率带来提升，即不能实现水平扩展，不支持任务分片。</li>
+</ul>
+<h4 id="分布式多实例运行问题"><a href="#分布式多实例运行问题" class="headerlink" title="分布式多实例运行问题"></a>分布式多实例运行问题</h4><p>scheduler与web配置在一起，在高可用的情况下，如果有多个web容器实例，scheduler会在多个实例上同时运行。<br>解决办法：<br>1.使用写死服务器Host的方式执行task，存在单点风险，负载均衡手动完成。（或者一台代码中配置任务，其他不配置任务）<br>2.在task的基类加入一些逻辑，当开始运行时，将状态（运行机器的IP、时间等）写入数据库、缓存（redis）或者zk，运行结束时重置状态。其它实例看到有这样的数据，就直接返回。带来的问题是：<br>一定要保证结束运行后将状态重置，否则下一个运行周期，所有的task都会返回的。 因为读写状态并非原子操作，偶尔也会发生task同时运行的事。<br>3.使用zk,redis分布式锁，比如在任务执行方法上自定义注解，在注解中配置锁在zk的路径，在该注解上自定义个拦截器，在拦截器中获取zk锁。</p>
+<h2 id="分布式任务框架"><a href="#分布式任务框架" class="headerlink" title="分布式任务框架"></a>分布式任务框架</h2><h5 id="xxl-job"><a href="#xxl-job" class="headerlink" title="xxl-job"></a>xxl-job</h5><p>XXL-JOB是一个轻量级分布式任务调度平台，其核心设计目标是开发迅速、学习简单、轻量级、易扩展。现已开放源代码并接入多家公司线上产品线，开箱即用。</p>
+<ul>
+<li>特性：<br>1.解决了单点问题，作业高可用，“调度中心”通过DB锁保证集群分布式调度的一致性, 一次任务调度只会触发一次执行；<br>2.可视化的、web任务管理平台。<br>3.基于数据库的.<br>4.弹性，水平扩展很好；<br>5.控制台功能很完善，可以看看官方文档。</li>
+<li>github:<br><a href="https://github.com/xuxueli/xxl-job/" target="_blank" rel="noopener">https://github.com/xuxueli/xxl-job/</a></li>
+<li>文档：<br><a href="http://www.xuxueli.com/xxl-job/" target="_blank" rel="noopener">http://www.xuxueli.com/xxl-job/</a></li>
+<li>架构：<br><img src="/assets/2018/elstic-job/xxl-job-jiagou.png" width="800" div="" align="center"></li>
+</ul>
+<h5 id="elastic-job-lite"><a href="#elastic-job-lite" class="headerlink" title="elastic-job-lite"></a>elastic-job-lite</h5><p>当当家的elastic-job-lite定位是轻量级无中心化解决方案分布式任务调度平台，使用jar包的形式提供分布式任务的协调服务。</p>
+<ul>
+<li><p>特点<br>1.支持任务分片.<br>2.弹性，水平扩展很好；<br>3.解决了单点问题，作业高可用。<br>4.可视化的、web任务管理平台。<br>5.基于zk，去中心化的HA，很好的解决了任务多的问题。</p>
+</li>
+<li><p>三种类型的作业：<br>1.Simple类型作业<br>2.Dataflow类型作业<br>3.Script类型作业。</p>
+</li>
+<li><p>github:<br><a href="https://github.com/elasticjob/elastic-job-lite" target="_blank" rel="noopener">https://github.com/elasticjob/elastic-job-lite</a></p>
+</li>
+<li>文档：<br><a href="http://elasticjob.io/docs/elastic-job-lite/" target="_blank" rel="noopener">http://elasticjob.io/docs/elastic-job-lite/</a></li>
+<li>架构：<br><img src="/assets/2018/elstic-job/elastic-job-lite-jiagou.png" width="800" div="" align="center"></li>
+</ul>
+<p>后面会对elastic-job-lite进行源码阅读。~~</p>
 
       
 
@@ -194,7 +240,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Dubbo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">elastic-job</a>
         		</li>
       		
 		</ul>
@@ -250,7 +296,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/02/Dubbo源码学习-1-序/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/05/你对作业怎么看/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,18 +310,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/12/05/你对作业怎么看/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/12/06/Dubbo源码学习-2-SPI/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          你对&#34;作业&#34;怎么看?
+          dubbo源码学习-2-SPI
         
       </div>
     </a>
   
   
-    <a href="/2018/11/17/怎样成为Dubbo的贡献者/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">怎样成为dubbo的贡献者</div>
+    <a href="/2018/12/02/Dubbo源码学习-1-序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Dubbo源码学习-序</div>
       <i class="icon-circle-right"></i>
     </a>
   

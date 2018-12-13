@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//wangweiufofly.github.io">
-  <title>延时消息设计 | Yeling的博客</title>
+  <title>Elastic-Job项目源码-任务init | Yeling的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。 笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后， 先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的）， 并且很多都不完善,加上公司业务场景需要支持每个topic只能有">
-<meta name="keywords" content="服务端,java,Spring,mysql,redis,程序猿,开源,架构,用户体验">
+  <meta name="description" content="涉及的类图 入口12345678 private static void setUpSimpleJob(final CoordinatorRegistryCenter regCenter, final JobEventConfiguration jobEventConfig) &amp;#123;    //定义任务    JobCoreConfiguration coreConfig = JobCore">
+<meta name="keywords" content="elastic-job">
 <meta property="og:type" content="article">
-<meta property="og:title" content="延时消息设计">
-<meta property="og:url" content="//wangweiufofly.github.io/2018/11/16/延时消息设计/index.html">
+<meta property="og:title" content="Elastic-Job项目源码-任务init">
+<meta property="og:url" content="//wangweiufofly.github.io/2018/12/12/Elastic-Job项目源码-任务init/index.html">
 <meta property="og:site_name" content="Yeling的博客">
-<meta property="og:description" content="背景    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。 笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后， 先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的）， 并且很多都不完善,加上公司业务场景需要支持每个topic只能有">
+<meta property="og:description" content="涉及的类图 入口12345678 private static void setUpSimpleJob(final CoordinatorRegistryCenter regCenter, final JobEventConfiguration jobEventConfig) &amp;#123;    //定义任务    JobCoreConfiguration coreConfig = JobCore">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="evernotecid://828564D9-41A6-4AB5-91C7-510B39A2D751/appyinxiangcom/79943/ENResource/p652">
-<meta property="og:updated_time" content="2018-11-16T08:38:42.601Z">
+<meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/elastic-job-init-class.png">
+<meta property="og:updated_time" content="2018-12-13T12:39:27.965Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="延时消息设计">
-<meta name="twitter:description" content="背景    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。 笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后， 先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的）， 并且很多都不完善,加上公司业务场景需要支持每个topic只能有">
-<meta name="twitter:image" content="evernotecid://828564D9-41A6-4AB5-91C7-510B39A2D751/appyinxiangcom/79943/ENResource/p652">
+<meta name="twitter:title" content="Elastic-Job项目源码-任务init">
+<meta name="twitter:description" content="涉及的类图 入口12345678 private static void setUpSimpleJob(final CoordinatorRegistryCenter regCenter, final JobEventConfiguration jobEventConfig) &amp;#123;    //定义任务    JobCoreConfiguration coreConfig = JobCore">
+<meta name="twitter:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/elastic-job-init-class.png">
   
     <link rel="alternative" href="/atom.xml" title="Yeling的博客" type="application/atom+xml">
   
@@ -151,114 +151,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-延时消息设计" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-Elastic-Job项目源码-任务init" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      延时消息设计
+      Elastic-Job项目源码-任务init
     </h1>
   
 
         
-        <a href="/2018/11/16/延时消息设计/" class="archive-article-date">
-  	<time datetime="2018-11-16T08:30:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-16</time>
+        <a href="/2018/12/12/Elastic-Job项目源码-任务init/" class="archive-article-date">
+  	<time datetime="2018-12-12T13:46:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><pre><code>    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。
-笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后，
-先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的），
-并且很多都不完善,加上公司业务场景需要支持每个topic只能有一个job的限制，
-以及同一个job操作计数达到某个值后就触发转为可执行job。
-所以笔者打算依据现有的延时队列实现原理，一步一步实现一个分布式延时队列
-</code></pre><h2 id="常见的实现方案"><a href="#常见的实现方案" class="headerlink" title="常见的实现方案"></a>常见的实现方案</h2><pre><code>1. DelayQueue 
-    原理：jdk中提供的使用优先队列实现的BlockingQueue，优先队列比较的是时间，内部存储的是实现Delayed接口的对象。 
-          只有在对象过期后才能从队列中获取对象。
-    优点：效率高，任务触发时间延迟低
-    缺点： 数据是保存在内存，需要自己实现持久化；不具备分布式能力，需要自己实现高可用
-2. RabbitMq 死信队列
-    原理：RabbitMQ可以对队列和消息设置x-message-tt、expiration来控制消息的存活时间，如果超时，消息变为死信。
-          RabbitMQ可以对队列设置x-dead-letter-exchange和x-dead-letter-routing-key两个参数。
-          当消息在一个队列中变成死信后会按这两个参数路由，消息就可以重新被消费。
-    优点：
-        高效，可以利用RabbitMQ的分布式特性轻易进行横向扩展，且支持持久化
-    缺点：
-        不支持对已发送的消息进行管理
-        一个消息比在同一队列中在它之前的其他消息提前过期，提前过期的消息也不会优先进入死信队列。比如
-</code></pre><a id="more"></a>
-<pre><code>3. Redis实现
-    原理：将延迟任务加到Sorted Set，将延迟时间设为score；启动一个线程不断判断Sorted Set中第一个元素的score是否大于当前时间
-        如果大于，从Sorted Set中移除任务并添加到执行队列中；如果小于，进行短暂休眠后重试
+        <h1 id="涉及的类图"><a href="#涉及的类图" class="headerlink" title="涉及的类图"></a>涉及的类图</h1><p><img src="/assets/2018/elstic-job/elastic-job-init-class.png" div="" align="center"></p>
+<h1 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setUpSimpleJob</span><span class="params">(<span class="keyword">final</span> CoordinatorRegistryCenter regCenter, <span class="keyword">final</span> JobEventConfiguration jobEventConfig)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//定义任务</span></span><br><span class="line">    JobCoreConfiguration coreConfig = JobCoreConfiguration.newBuilder(<span class="string">"javaSimpleJob"</span>, <span class="string">"0/5 * * * * ?"</span>, <span class="number">3</span>).shardingItemParameters(<span class="string">"0=Beijing,1=Shanghai,2=Guangzhou"</span>).build();</span><br><span class="line">    SimpleJobConfiguration simpleJobConfig = <span class="keyword">new</span> SimpleJobConfiguration(coreConfig, JavaSimpleJob.class.getCanonicalName());</span><br><span class="line">    <span class="comment">//任务初始化</span></span><br><span class="line">    <span class="keyword">new</span> JobScheduler(regCenter, LiteJobConfiguration.newBuilder(simpleJobConfig).build(), jobEventConfig).init();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><h2 id="JobScheduler-init"><a href="#JobScheduler-init" class="headerlink" title="JobScheduler-init"></a>JobScheduler-init</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JobScheduler.java</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 初始化作业.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 更新 作业配置</span></span><br><span class="line">   LiteJobConfiguration liteJobConfigFromRegCenter = schedulerFacade.updateJobConfiguration(liteJobConfig);</span><br><span class="line">   <span class="comment">// 设置 当前作业分片总数</span></span><br><span class="line">   JobRegistry.getInstance().setCurrentShardingTotalCount(liteJobConfigFromRegCenter.getJobName(), liteJobConfigFromRegCenter.getTypeConfig().getCoreConfig().getShardingTotalCount());</span><br><span class="line">   <span class="comment">// 创建 作业调度控制器</span></span><br><span class="line">   JobScheduleController jobScheduleController = <span class="keyword">new</span> JobScheduleController(</span><br><span class="line">           createScheduler(), createJobDetail(liteJobConfigFromRegCenter.getTypeConfig().getJobClass()), liteJobConfigFromRegCenter.getJobName());</span><br><span class="line">   <span class="comment">// 添加 作业调度控制器</span></span><br><span class="line">   JobRegistry.getInstance().registerJob(liteJobConfigFromRegCenter.getJobName(), jobScheduleController, regCenter);</span><br><span class="line">   <span class="comment">// 注册 作业启动信息</span></span><br><span class="line">   schedulerFacade.registerStartUpInfo(!liteJobConfigFromRegCenter.isDisabled());</span><br><span class="line">   <span class="comment">// 调度作业</span></span><br><span class="line">   jobScheduleController.scheduleJob(liteJobConfigFromRegCenter.getTypeConfig().getCoreConfig().getCron());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="更新作业配置"><a href="#更新作业配置" class="headerlink" title="更新作业配置"></a>更新作业配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SchedulerFacade.java</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 更新作业配置.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> liteJobConfig 作业配置</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span> 更新后的作业配置</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> LiteJobConfiguration <span class="title">updateJobConfiguration</span><span class="params">(<span class="keyword">final</span> LiteJobConfiguration liteJobConfig)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 更新 作业配置</span></span><br><span class="line">   configService.persist(liteJobConfig);</span><br><span class="line">   <span class="comment">// 读取 作业配置</span></span><br><span class="line">   <span class="keyword">return</span> configService.load(<span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="设置作业分片总数"><a href="#设置作业分片总数" class="headerlink" title="设置作业分片总数"></a>设置作业分片总数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JobRegistry.java</span></span><br><span class="line"><span class="keyword">private</span> Map&lt;String, Integer&gt; currentShardingTotalCountMap = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 设置当前分片总数.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> jobName 作业名称</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> currentShardingTotalCount 当前分片总数</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCurrentShardingTotalCount</span><span class="params">(<span class="keyword">final</span> String jobName, <span class="keyword">final</span> <span class="keyword">int</span> currentShardingTotalCount)</span> </span>&#123;</span><br><span class="line">   currentShardingTotalCountMap.put(jobName, currentShardingTotalCount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建作业调度控制器"><a href="#创建作业调度控制器" class="headerlink" title="创建作业调度控制器"></a>创建作业调度控制器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JobScheduler.java</span></span><br><span class="line"><span class="comment">// 创建 作业调度控制器</span></span><br><span class="line">   JobScheduleController jobScheduleController = <span class="keyword">new</span> JobScheduleController(</span><br><span class="line">           createScheduler(), createJobDetail(liteJobConfigFromRegCenter.getTypeConfig().getJobClass()), liteJobConfigFromRegCenter.getJobName());</span><br></pre></td></tr></table></figure>
+<ul>
+<li>JobScheduleController,作业调度控制器，提供对 Quartz 方法的封装：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">JobScheduleController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Quartz 调度器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Scheduler scheduler;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 作业信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> JobDetail jobDetail;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 触发器编号</span></span><br><span class="line"><span class="comment">     * 目前使用工作名字( jobName )</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String triggerIdentity;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">scheduleJob</span><span class="params">(<span class="keyword">final</span> String cron)</span> </span>&#123;&#125; <span class="comment">// 调度作业</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">rescheduleJob</span><span class="params">(<span class="keyword">final</span> String cron)</span> </span>&#123;&#125; <span class="comment">// 重新调度作业</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> CronTrigger <span class="title">createTrigger</span><span class="params">(<span class="keyword">final</span> String cron)</span> </span>&#123;&#125; <span class="comment">// 创建触发器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">isPaused</span><span class="params">()</span> </span>&#123;&#125; <span class="comment">// 判断作业是否暂停</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">pauseJob</span><span class="params">()</span> </span>&#123;&#125; <span class="comment">// 暂停作业</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">resumeJob</span><span class="params">()</span> </span>&#123;&#125; <span class="comment">// 恢复作业</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">triggerJob</span><span class="params">()</span> </span>&#123;&#125; <span class="comment">// 立刻启动作业</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span> </span>&#123;&#125; <span class="comment">// 关闭调度器</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>调用 #createScheduler() 方法创建 Quartz 调度器：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JobScheduler.java</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> Scheduler <span class="title">createScheduler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   Scheduler result;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">       StdSchedulerFactory factory = <span class="keyword">new</span> StdSchedulerFactory();</span><br><span class="line">       factory.initialize(getBaseQuartzProperties());</span><br><span class="line">       result = factory.getScheduler();</span><br><span class="line">       result.getListenerManager().addTriggerListener(schedulerFacade.newJobTriggerListener());</span><br><span class="line">   &#125; <span class="keyword">catch</span> (<span class="keyword">final</span> SchedulerException ex) &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> JobSystemException(ex);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">private</span> Properties <span class="title">getBaseQuartzProperties</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   Properties result = <span class="keyword">new</span> Properties();</span><br><span class="line">   result.put(<span class="string">"org.quartz.threadPool.class"</span>, org.quartz.simpl.SimpleThreadPool.class.getName());</span><br><span class="line">   result.put(<span class="string">"org.quartz.threadPool.threadCount"</span>, <span class="string">"1"</span>); <span class="comment">// Quartz 线程数：1</span></span><br><span class="line">   result.put(<span class="string">"org.quartz.scheduler.instanceName"</span>, liteJobConfig.getJobName());</span><br><span class="line">   result.put(<span class="string">"org.quartz.jobStore.misfireThreshold"</span>, <span class="string">"1"</span>);</span><br><span class="line">   result.put(<span class="string">"org.quartz.plugin.shutdownhook.class"</span>, JobShutdownHookPlugin.class.getName()); <span class="comment">// 作业关闭钩子</span></span><br><span class="line">   result.put(<span class="string">"org.quartz.plugin.shutdownhook.cleanShutdown"</span>, Boolean.TRUE.toString()); <span class="comment">// 关闭时，清理所有资源</span></span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>org.quartz.threadPool.threadCount = 1，即 Quartz 执行作业线程数量为 1。原因：一个作业( ElasticJob )的调度，需要配置独有的一个作业调度器( JobScheduler )，两者是 1 : 1 的关系。<br>org.quartz.plugin.shutdownhook.class 设置作业优雅关闭钩子：JobShutdownHookPlugin,删除主节点，关闭运行状态操作。</p>
+<ul>
+<li>调用 #createJobDetail() 方法创建 Quartz 作业：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JobScheduler.java</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> JobDetail <span class="title">createJobDetail</span><span class="params">(<span class="keyword">final</span> String jobClass)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 创建 Quartz 作业</span></span><br><span class="line">   JobDetail result = JobBuilder.newJob(LiteJob.class).withIdentity(liteJobConfig.getJobName()).build();</span><br><span class="line">   <span class="comment">//</span></span><br><span class="line">   result.getJobDataMap().put(JOB_FACADE_DATA_MAP_KEY, jobFacade);</span><br><span class="line">   <span class="comment">// 创建 Elastic-Job 对象</span></span><br><span class="line">   Optional&lt;ElasticJob&gt; elasticJobInstance = createElasticJobInstance();</span><br><span class="line">   <span class="keyword">if</span> (elasticJobInstance.isPresent()) &#123;</span><br><span class="line">       result.getJobDataMap().put(ELASTIC_JOB_DATA_MAP_KEY, elasticJobInstance.get());</span><br><span class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!jobClass.equals(ScriptJob.class.getCanonicalName())) &#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           result.getJobDataMap().put(ELASTIC_JOB_DATA_MAP_KEY, Class.forName(jobClass).newInstance());</span><br><span class="line">       &#125; <span class="keyword">catch</span> (<span class="keyword">final</span> ReflectiveOperationException ex) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> JobConfigurationException(<span class="string">"Elastic-Job: Job class '%s' can not initialize."</span>, jobClass);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">protected</span> Optional&lt;ElasticJob&gt; <span class="title">createElasticJobInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> Optional.absent();</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// SpringJobScheduler.java</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> Optional&lt;ElasticJob&gt; <span class="title">createElasticJobInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> Optional.fromNullable(elasticJob);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="注册作业启动信息"><a href="#注册作业启动信息" class="headerlink" title="注册作业启动信息"></a>注册作业启动信息</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 注册作业启动信息.</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> enabled 作业是否启用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerStartUpInfo</span><span class="params">(<span class="keyword">final</span> <span class="keyword">boolean</span> enabled)</span> </span>&#123;</span><br><span class="line">     <span class="comment">// 开启 所有监听器</span></span><br><span class="line">       listenerManager.startAllListeners();</span><br><span class="line">       <span class="comment">// 选举 主节点</span></span><br><span class="line">       leaderService.electLeader();</span><br><span class="line">       <span class="comment">// 持久化 作业服务器上线信息</span></span><br><span class="line">       serverService.persistOnline(enabled);</span><br><span class="line">       <span class="comment">// 持久化 作业运行实例上线相关信息</span></span><br><span class="line">       instanceService.persistOnline();</span><br><span class="line">       <span class="comment">// 设置 需要重新分片的标记</span></span><br><span class="line">       shardingService.setReshardingFlag();</span><br><span class="line">       <span class="comment">// 初始化 作业监听服务</span></span><br><span class="line">       monitorService.listen();</span><br><span class="line">       <span class="comment">// 初始化 调解作业不一致状态服务</span></span><br><span class="line">       <span class="keyword">if</span> (!reconcileService.isRunning()) &#123;</span><br><span class="line">           reconcileService.startAsync();</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="调度作业"><a href="#调度作业" class="headerlink" title="调度作业"></a>调度作业</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JobScheduler.java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">// .... 省略部分代码</span></span><br><span class="line">   <span class="comment">// 调度作业</span></span><br><span class="line">   jobScheduleController.scheduleJob(liteJobConfigFromRegCenter.getTypeConfig().getCoreConfig().getCron());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// JobScheduleController.java</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 调度作业.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> cron CRON表达式</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">scheduleJob</span><span class="params">(<span class="keyword">final</span> String cron)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="keyword">if</span> (!scheduler.checkExists(jobDetail.getKey())) &#123;</span><br><span class="line">           scheduler.scheduleJob(jobDetail, createTrigger(cron));</span><br><span class="line">       &#125;</span><br><span class="line">       scheduler.start();</span><br><span class="line">   &#125; <span class="keyword">catch</span> (<span class="keyword">final</span> SchedulerException ex) &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> JobSystemException(ex);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><p>至此，一个任务的初始化任务完成。</p>
+</li>
+<li><p>优点，任务流程清晰，为后面的任务调度，选主，分片，zk监听等功能提供了很好的支持。</p>
+</li>
+<li><p>疑问点：看第一个导图，在一个任务创建了太多的重复类，每一种service的都应该以jobName为key的对象实现。是否可以优化？</p>
+</li>
+</ul>
 
-    优点：实现简单，任务可管理（可删除、修改任务）
-    缺点：需要有短轮询线程不断判断第一个元素是否过期，造成CPU空耗
-          分布式场景中，容易引起多个节点读取到相同任务
-4. 时间轮
-    单表时间轮、分层时间轮
-    原理：时间轮是一种环形的数据结构，分成多个格，每个格代表一段时间，时间越短，精度越高。
-          每个格上用一个链表保存在该格的过期任务。
-          指针随着时间一格一格转动，并执行相应格子中的到期任务。
-    优点：
-        高性能（插入任务、删除任务的时间复杂度均为O(1)，DelayQueue由于涉及到排序，插入和移除的复杂度是O(logn)）
-    缺点：
-        数据是保存在内存，需要自己实现持久化
-        不具备分布式能力，需要自己实现高可用
-        延迟任务过期时间受时间轮总间隔限制
-</code></pre><h2 id="希望达到的目标是？"><a href="#希望达到的目标是？" class="headerlink" title="希望达到的目标是？"></a>希望达到的目标是？</h2><pre><code>精确性(可在指定时间触发任务处理)
-通用性
-高性能
-高可用(支持多实例部署)
-可伸缩(增加和减少服务时，任务会重新分配)
-可重试(任务失败可重试)
-多协议(支持http\dubbo调用)
-可管理(业务使用方可修改、删除任务)
-能告警(失败次数达到阈值可触发告警)
-统一视图(方便查看任务执行情况,可手动干预任务执行)
-</code></pre><h2 id="当前设计"><a href="#当前设计" class="headerlink" title="当前设计"></a>当前设计</h2><h3 id="结构图如下"><a href="#结构图如下" class="headerlink" title="结构图如下"></a>结构图如下</h3><p><img src="evernotecid://828564D9-41A6-4AB5-91C7-510B39A2D751/appyinxiangcom/79943/ENResource/p652" alt="8f061589c89979034a92cbe2cd4b229e.png"></p>
-<h3 id="关键元素"><a href="#关键元素" class="headerlink" title="关键元素"></a>关键元素</h3><pre><code>1. topic
-    主题，可以包含一个或多个job。其结构为：topic,capacity,subJobLimit.
-    topic:主题名称，不同的业务场景应有不同的topic,如订单支付超时、自动评价、作业点等
-    capacity: 容量。topic中job数量的限制。默认为Integer.maxValue
-    subJobLimit:job的计数触发值，客户端需要调用接口通知job的计数值，job的计数值达到这个数据则触发job转到就绪队列。
-1. job
-    任务单元，其结构为：id,topic,delayTime,expireTime,triggerType,data
-    id: job的唯一标示，使用方应保证不同的job,其id不同
-    topic: 主题，区分不同的场景，比如下单支付场景topic可为orderPay，超时自动评价的topic可为autoComment.
-    delayTime: 延迟时间，秒为单位。
-    expireTime：过期时间，绝对时间。等于接收到job的系统时间+delayTime
-    triggerType:触发类型，目前有过期触发和计数触发。计数触发是指计数达到某一个数值而触发操作。
-    data： job的业务数据，消费者根据此数据进行业务处理。
-
-2. bucket
-    bucket只存储job的id，类似链表结构。delay bucket存储触发类型为过期触发的job,countdown bucket存储触发类型为计数的job.
-
-3. timer
-    调度器，用来将到期和到达计数的job取出，按照topic发送到reday queue.
-
-4. reday queue
-    reday queue，就绪队列。按照topic区分，一个topic对应一个reday queue.消费者可通过轮询拉取就绪队列中的消息。
-    考虑以后实现push方式。
-</code></pre><h3 id="几个关键点"><a href="#几个关键点" class="headerlink" title="几个关键点"></a>几个关键点</h3><pre><code>1. 如何持久化job数据？
-    为了防止停机造成job数据丢失，应当将job信息和bucket信息持久化存储。第一版使用redis存储，需要redis开启持久化机制，做好主备。
-    使用spi,抽象存储功能，方便接入其他持久化方案，比如数据库、自定义文件系统等。
-
-2. 如何获取延时结束或者倒数结束的job ?
-    Timer定时轮询delay bucket 和 countdown bucket，将已过期和已到达计数控制的bucket中的job取出，放入对应的reday queue.
-    抽象调度功能，后续实现更高效的方案。
-
-3. 消费端如何获取就绪数据？
-    提供获取数据的http接口，消费端轮询获取数据。后续考虑增加push方式。
-</code></pre><h2 id="road-map"><a href="#road-map" class="headerlink" title="road map"></a>road map</h2><pre><code>1.0 基本功能
-1.1 与spring的集成
-1.2 持久化、调度、消息消费等的优化
-2.x 集群功能
-</code></pre>
       
 
       
@@ -266,6 +209,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">elastic-job</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -316,7 +270,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/11/16/延时消息设计/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wangweiufofly.github.io/2018/12/12/Elastic-Job项目源码-任务init/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -330,18 +284,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/11/16/营销活动-优惠券架构设计/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          营销活动&amp;优惠券架构设计
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/11/15/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2018/12/11/Dubbo源码学习-6-集群容错LoadBalance/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Dubbo源码学习-6-集群容错LoadBalance</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -472,6 +417,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">elastic-job</a>
               </li>
              
               <li class="article-tag-list-item">
