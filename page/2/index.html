@@ -150,6 +150,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-你对作业怎么看" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/05/你对作业怎么看/">你对&#34;作业&#34;怎么看?</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/05/你对作业怎么看/" class="archive-article-date">
+  	<time datetime="2018-12-05T03:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是作业"><a href="#什么是作业" class="headerlink" title="什么是作业?"></a>什么是作业?</h1><ul>
+<li>我们不是小学生的课堂作业，在这里，作业即定时任务.无需做复杂的控制,在指定的时间执行指定的任务.</li>
+</ul>
+<h1 id="为什么需要作业"><a href="#为什么需要作业" class="headerlink" title="为什么需要作业?"></a>为什么需要作业?</h1><p>时间驱动/事件驱动: 内部系统一般可以通过事件来驱动,但涉及到外部系统,则只能使用时间驱动.</p>
+<ul>
+<li>如：抓取外部系统价格.每小时抓取，由于是外部系统,不能像内部系统一样发送事件触发事件.</li>
+<li>批量处理/逐条处理：批量处理堆积的数据更加高效,在不需要实时性的情况下比消息中间件更有优势,而且有的业务逻辑只能批量处理.</li>
+<li>系统内部/系统解耦：作业一般封装在系统内部，而消息中间件可用于系统间解耦.</li>
+</ul>
+        
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">elastic-job</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/05/你对作业怎么看/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Dubbo源码学习-1-序" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -387,90 +470,6 @@
 
 
   
-    <article id="post-延时消息设计" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/15/延时消息设计/">延时消息设计</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/15/延时消息设计/" class="archive-article-date">
-  	<time datetime="2018-10-15T08:30:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><pre><code>    延迟队列在互联网项目中比较常用，比如订单系统中的超时30分钟未付款，订单取消；用户打车后，48小时后自动评价为5星等等。
-笔者以前做众包抢单项目用的是rabbitmq的死信队列，达到延迟处理效果。但是在把延迟时间变短后，
-先过期的消息必须等它之前的消息过期后才能被处理。目前开源的分布式延时队列并不多（一些大公司有自研的），
-并且很多都不完善,加上公司业务场景需要支持每个topic只能有一个job的限制，
-以及同一个job操作计数达到某个值后就触发转为可执行job。
-所以笔者打算依据现有的延时队列实现原理，一步一步实现一个分布式延时队列
-</code></pre><h2 id="常见的实现方案"><a href="#常见的实现方案" class="headerlink" title="常见的实现方案"></a>常见的实现方案</h2><pre><code>1. DelayQueue 
-    原理：jdk中提供的使用优先队列实现的BlockingQueue，优先队列比较的是时间，内部存储的是实现Delayed接口的对象。 
-          只有在对象过期后才能从队列中获取对象。
-    优点：效率高，任务触发时间延迟低
-    缺点： 数据是保存在内存，需要自己实现持久化；不具备分布式能力，需要自己实现高可用
-2. RabbitMq 死信队列
-    原理：RabbitMQ可以对队列和消息设置x-message-tt、expiration来控制消息的存活时间，如果超时，消息变为死信。
-          RabbitMQ可以对队列设置x-dead-letter-exchange和x-dead-letter-routing-key两个参数。
-          当消息在一个队列中变成死信后会按这两个参数路由，消息就可以重新被消费。
-    优点：
-        高效，可以利用RabbitMQ的分布式特性轻易进行横向扩展，且支持持久化
-    缺点：
-        不支持对已发送的消息进行管理
-        一个消息比在同一队列中在它之前的其他消息提前过期，提前过期的消息也不会优先进入死信队列。比如
-</code></pre>
-        
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/15/延时消息设计/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
@@ -572,11 +571,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
+                <a href="javascript:void(0)" class="js-tag color2">elastic-job</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">elastic-job</a>
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">

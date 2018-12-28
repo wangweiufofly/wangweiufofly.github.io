@@ -17,7 +17,7 @@
 <meta property="og:description" content="涉及的类图 入口12345678 private static void setUpSimpleJob(final CoordinatorRegistryCenter regCenter, final JobEventConfiguration jobEventConfig) &amp;#123;    //定义任务    JobCoreConfiguration coreConfig = JobCore">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="//wangweiufofly.github.io/assets/2018/elstic-job/elastic-job-init-class.png">
-<meta property="og:updated_time" content="2018-12-13T12:39:27.965Z">
+<meta property="og:updated_time" content="2018-12-14T03:12:16.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elastic-Job项目源码-任务init">
 <meta name="twitter:description" content="涉及的类图 入口12345678 private static void setUpSimpleJob(final CoordinatorRegistryCenter regCenter, final JobEventConfiguration jobEventConfig) &amp;#123;    //定义任务    JobCoreConfiguration coreConfig = JobCore">
@@ -198,7 +198,9 @@
 </li>
 <li><p>优点，任务流程清晰，为后面的任务调度，选主，分片，zk监听等功能提供了很好的支持。</p>
 </li>
-<li><p>疑问点：看第一个导图，在一个任务创建了太多的重复类，每一种service的都应该以jobName为key的对象实现。是否可以优化？</p>
+<li><p>疑问点，看第一个导图，在一个任务创建了太多的重复类，都是内部new出对象。我理解框架不想耦合当前的ioc的框架做出的妥协，但是可否自实现一些简单的功能。</p>
+</li>
+<li><p>建议，其实在阅读dubbo源码时，dubbo当时也存在相同的问题。dubbo的SPI个人觉得值得学习，可否改造出一版elastic-job版本的SPI，CoordinatorRegistryCenter regCenter或许就不用全框架内传递了。</p>
 </li>
 </ul>
 
@@ -283,6 +285,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/12/28/延时消息设计/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          延时消息设计
+        
+      </div>
+    </a>
   
   
     <a href="/2018/12/11/Dubbo源码学习-6-集群容错LoadBalance/" id="article-nav-older" class="article-nav-link-wrap">
@@ -416,11 +427,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
+                <a href="javascript:void(0)" class="js-tag color2">elastic-job</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">elastic-job</a>
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">

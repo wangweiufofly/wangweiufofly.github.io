@@ -150,6 +150,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-延时消息设计" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/28/延时消息设计/">延时消息设计</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/28/延时消息设计/" class="archive-article-date">
+  	<time datetime="2018-12-28T08:30:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li>当订单一直处于未支付状态时，如何及时的关闭订单，并退还库存？</li>
+<li>如何定期检查处于退款状态的订单是否已经退款成功？</li>
+<li>砍价的定制化的延迟提醒?</li>
+<li>注册用户15天未下单用户需要发红包，并推送？</li>
+<li>…</li>
+</ul>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>可靠性：消息进入到延迟队列后，保证至少被消费一次。</li>
+<li>高可用性：至少得支持多实例部署。挂掉一个实例后，还有后备实例继续提供服务。</li>
+<li>实时性：允许存在一定的时间误差，希望在秒级。</li>
+<li>粒度不限性：业务使用方，可以随时指定未来的时间执行。</li>
+<li>支持消息删除：业务使用方，可以随时删除指定消息。</li>
+</ul>
+<h2 id="常见的实现方案"><a href="#常见的实现方案" class="headerlink" title="常见的实现方案"></a>常见的实现方案</h2><h3 id="1-轮训-DB"><a href="#1-轮训-DB" class="headerlink" title="1. 轮训+DB"></a>1. 轮训+DB</h3><p>  原理：定时任务扫描扫描db。<br>  优点：实现简单，保证了可靠性，高可用性，实时性。<br>  缺点：很难实现到细粒度，否则数据库压力比较大，程序CPU很大浪费。</p>
+<h3 id="2-RocketMQ"><a href="#2-RocketMQ" class="headerlink" title="2. RocketMQ"></a>2. RocketMQ</h3><p>  原理：mq自带延迟消费。<br>  优点：实现简单，保证了可靠性，高可用性，实时性，不需要轮训任务，MQ自带实现。<br>  缺点：比较死的粒度，18个level，最大2小时。</p>
+        
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/28/延时消息设计/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Elastic-Job项目源码-任务init" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -676,89 +755,6 @@
 
 
   
-    <article id="post-你对作业怎么看" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/05/你对作业怎么看/">你对&#34;作业&#34;怎么看?</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/05/你对作业怎么看/" class="archive-article-date">
-  	<time datetime="2018-12-05T03:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="什么是作业"><a href="#什么是作业" class="headerlink" title="什么是作业?"></a>什么是作业?</h1><ul>
-<li>我们不是小学生的课堂作业，在这里，作业即定时任务.无需做复杂的控制,在指定的时间执行指定的任务.</li>
-</ul>
-<h1 id="为什么需要作业"><a href="#为什么需要作业" class="headerlink" title="为什么需要作业?"></a>为什么需要作业?</h1><p>时间驱动/事件驱动: 内部系统一般可以通过事件来驱动,但涉及到外部系统,则只能使用时间驱动.</p>
-<ul>
-<li>如：抓取外部系统价格.每小时抓取，由于是外部系统,不能像内部系统一样发送事件触发事件.</li>
-<li>批量处理/逐条处理：批量处理堆积的数据更加高效,在不需要实时性的情况下比消息中间件更有优势,而且有的业务逻辑只能批量处理.</li>
-<li>系统内部/系统解耦：作业一般封装在系统内部，而消息中间件可用于系统间解耦.</li>
-</ul>
-        
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">elastic-job</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/05/你对作业怎么看/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -860,11 +856,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
+                <a href="javascript:void(0)" class="js-tag color2">elastic-job</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">elastic-job</a>
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">
